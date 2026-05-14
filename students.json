@@ -1,0 +1,31 @@
+[
+  {
+    "reg": "0622I18545",
+    "name": "Abdul Samad",
+    "course": "DCA",
+    "start": "06-06-2022",
+    "end": "07-12-2022",
+    "grade": "A",
+    "pdf": "CERT.pdf"
+  },
+
+  {
+    "reg": "0622I18546",
+    "name": "Student Name 2",
+    "course": "ADCA",
+    "start": "01-01-2023",
+    "end": "30-06-2023",
+    "grade": "A+",
+    "pdf": "CERT2.pdf"
+  },
+
+  {
+    "reg": "0622I18547",
+    "name": "Student Name 3",
+    "course": "Tally",
+    "start": "05-02-2023",
+    "end": "05-05-2023",
+    "grade": "B+",
+    "pdf": "CERT3.pdf"
+  }
+]
