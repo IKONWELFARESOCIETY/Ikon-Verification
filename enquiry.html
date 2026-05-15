@@ -87,7 +87,12 @@ button{
   cursor:pointer;
 }
 
-button:hover{
+button:disabled{
+  background:gray;
+  cursor:not-allowed;
+}
+
+button:hover:not(:disabled){
   background:#1238a9;
 }
 
@@ -99,6 +104,7 @@ button:hover{
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -132,13 +138,14 @@ button:hover{
       <option value="">Select Course</option>
       <option>DCA</option>
       <option>ADCA</option>
-      <option>PGDAMMS Office</option>
+      <option>PGDAM</option>
+      <option>MS Office</option>
       <option>Advance Excel</option>
     </select>
 
     <input type="text" id="address" placeholder="Your Address" required>
 
-    <button type="submit">Submit Enquiry</button>
+    <button id="submitBtn" type="submit">Submit Enquiry</button>
   </form>
 
   <div id="msg"></div>
@@ -147,8 +154,15 @@ button:hover{
 </div>
 
 <script>
-document.getElementById("enquiryForm").addEventListener("submit", function(e){
+document.getElementById("enquiryForm").addEventListener("submit", async function(e){
   e.preventDefault();
+
+  const btn = document.getElementById("submitBtn");
+  const msg = document.getElementById("msg");
+
+  btn.disabled = true;
+  btn.innerText = "Submitting...";
+  msg.innerText = "";
 
   const data = {
     name: document.getElementById("name").value,
@@ -157,24 +171,26 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
     address: document.getElementById("address").value
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbwH5OtJRvwgYcptT86VZBAcGi0-OQfw0IVHEu9mos7JS1qgi-kDZCSFpuiYRkxKoq8o/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(res => res.text())
-  .then(response => {
-    document.getElementById("msg").innerText =
-      "Enquiry submitted successfully!";
-    document.getElementById("enquiryForm").reset();
-  })
-  .catch(err => {
-    document.getElementById("msg").innerText =
-      "Error submitting enquiry.";
-  });
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwH5OtJRvwgYcptT86VZBAcGi0-OQfw0IVHEu9mos7JS1qgi-kDZCSFpuiYRkxKoq8o/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
 
+    const response = await res.text();
+
+    msg.innerText = "Enquiry submitted successfully!";
+    document.getElementById("enquiryForm").reset();
+
+  } catch (err) {
+    msg.innerText = "Error submitting enquiry.";
+  }
+
+  btn.disabled = false;
+  btn.innerText = "Submit Enquiry";
 });
 </script>
 
