@@ -150,10 +150,27 @@ button:hover{
 document.getElementById("enquiryForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  document.getElementById("msg").innerText =
-  "Enquiry submitted successfully!";
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    course: document.getElementById("course").value,
+    address: document.getElementById("address").value
+  };
 
-  this.reset();
+  fetch("https://script.google.com/macros/s/AKfycbwH5OtJRvwgYcptT86VZBAcGi0-OQfw0IVHEu9mos7JS1qgi-kDZCSFpuiYRkxKoq8o/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
+    document.getElementById("msg").innerText =
+      "Enquiry submitted successfully!";
+    document.getElementById("enquiryForm").reset();
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText =
+      "Error submitting enquiry.";
+  });
 });
 </script>
 
