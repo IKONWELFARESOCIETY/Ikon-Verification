@@ -172,27 +172,25 @@ document.getElementById("enquiryForm").addEventListener("submit", async function
   };
 
   try {
-   const res = await fetch("https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "text/plain"
-  },
-  body: JSON.stringify(data)
-});
+    const res = await fetch("https://script.google.com/macros/s/AKfycbyjvtAJAxGC5Uf12HOIKkLrax5wN-KpiOMOvQXdI0s1HrZ32L4u4QaTviW4znCeWnr3/exec", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
       body: JSON.stringify(data)
     });
 
-    const response = await res.text();
+    const text = await res.text();
 
-    msg.innerText = "Enquiry submitted successfully!";
-    document.getElementById("enquiryForm").reset();
+    if (text === "SUCCESS") {
+      msg.innerText = "Enquiry submitted successfully!";
+      document.getElementById("enquiryForm").reset();
+    } else {
+      msg.innerText = "Server Error: " + text;
+    }
 
   } catch (err) {
-    msg.innerText = "Error submitting enquiry.";
+    msg.innerText = "Network Error! Check deployment.";
   }
 
   btn.disabled = false;
