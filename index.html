@@ -60,30 +60,41 @@ fetch('https://opensheet.elk.sh/1zdVCJk81D6Kud22DZJJLXalFL0MKhzkvanSV0IYiQBQ/She
       <div class="pdf">
         <h3>Unlock Certificate PDF</h3>
         <p>Enter DOB (DDMMYYYY)</p>
-        <input type="password" id="dobInput" placeholder="e.g. 12052001" 
+
+        <input type="password" id="dobInput" placeholder="e.g. 12052001"
                style="padding:10px; width:200px;">
-        <button onclick="checkDOB('${student["DOB"]}','${student["pdf"]}')"
+
+        <button onclick="checkDOB('${student["DOB"]}','${student["pdf"] || ""}')"
                 style="padding:10px 15px; cursor:pointer;">
-          Unlock PDF
+          Unlock
         </button>
+
         <p id="msg" style="color:red;"></p>
 
-        <div id="pdfBox" style="display:none; margin-top:20px;">
-          <iframe id="pdfFrame"></iframe>
-        </div>
+        <div id="pdfBox" style="display:none; margin-top:20px;"></div>
       </div>
     `;
   });
 
 function checkDOB(correctDOB, pdfFile) {
   const entered = document.getElementById("dobInput").value.trim();
+  const msg = document.getElementById("msg");
+  const pdfBox = document.getElementById("pdfBox");
 
   if (entered === correctDOB.trim()) {
-    document.getElementById("pdfBox").style.display = "block";
-    document.getElementById("pdfFrame").src = pdfFile;
-    document.getElementById("msg").innerText = "";
+    msg.innerText = "";
+
+    if (pdfFile) {
+      pdfBox.style.display = "block";
+      pdfBox.innerHTML = `<iframe src="${pdfFile}"></iframe>`;
+    } else {
+      pdfBox.style.display = "block";
+      pdfBox.innerHTML = "<p>PDF not uploaded yet.</p>";
+    }
+
   } else {
-    document.getElementById("msg").innerText = "Wrong DOB!";
+    msg.innerText = "Wrong DOB!";
+    pdfBox.style.display = "none";
   }
 }
 </script>
