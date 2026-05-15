@@ -17,21 +17,44 @@
   }
 .slider {
   width: 100%;
-  height: 320px;
-  overflow: hidden;
+  max-width: 860px;
+  margin: 20px auto;
   position: relative;
-  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  background: white;
+}
+
+.slider {
+  width: 100%;
+  max-width: 860px;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  background: white;
 }
 
 .slide {
   width: 100%;
-  height: 320px;
+  height: 420px;
   object-fit: cover;
   display: none;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .slide.active {
   display: block;
+}
+
+.gallery-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1847d1;
+  margin-top: 20px;
 }
   .header {
     text-align:center;
@@ -151,11 +174,13 @@ fetch('https://opensheet.elk.sh/1zdVCJk81D6Kud22DZJJLXalFL0MKhzkvanSV0IYiQBQ/She
     Contact No: 9304669913
   </div>
 </div>
+<div class="gallery-title">IKON Institute Activities</div>
+
 <div class="slider">
-  <img src="img1.jpeg" class="slide active">
-  <img src="img2.jpeg" class="slide">
-  <img src="img3.jpeg" class="slide">
-  <img src="img4.jpeg" class="slide">
+  <img src="./img1.jpeg" class="slide active">
+  <img src="./img2.jpeg" class="slide">
+  <img src="./img3.jpeg" class="slide">
+  <img src="./img4.jpeg" class="slide">
 </div>
 
       <div class="verified">✓ CERTIFICATE VERIFIED</div>
