@@ -58,11 +58,34 @@ fetch('https://opensheet.elk.sh/1zdVCJk81D6Kud22DZJJLXalFL0MKhzkvanSV0IYiQBQ/She
       </div>
 
       <div class="pdf">
-        <h3>Certificate Preview</h3>
-        <iframe src="${student["pdf"]}"></iframe>
+        <h3>Unlock Certificate PDF</h3>
+        <p>Enter DOB (DDMMYYYY)</p>
+        <input type="password" id="dobInput" placeholder="e.g. 12052001" 
+               style="padding:10px; width:200px;">
+        <button onclick="checkDOB('${student["DOB"]}','${student["pdf"]}')"
+                style="padding:10px 15px; cursor:pointer;">
+          Unlock PDF
+        </button>
+        <p id="msg" style="color:red;"></p>
+
+        <div id="pdfBox" style="display:none; margin-top:20px;">
+          <iframe id="pdfFrame"></iframe>
+        </div>
       </div>
     `;
   });
+
+function checkDOB(correctDOB, pdfFile) {
+  const entered = document.getElementById("dobInput").value.trim();
+
+  if (entered === correctDOB.trim()) {
+    document.getElementById("pdfBox").style.display = "block";
+    document.getElementById("pdfFrame").src = pdfFile;
+    document.getElementById("msg").innerText = "";
+  } else {
+    document.getElementById("msg").innerText = "Wrong DOB!";
+  }
+}
 </script>
 </body>
 </html>
