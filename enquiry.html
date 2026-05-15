@@ -158,12 +158,11 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
   };
 
   fetch("https://script.google.com/macros/s/AKfycbwH5OtJRvwgYcptT86VZBAcGi0-OQfw0IVHEu9mos7JS1qgi-kDZCSFpuiYRkxKoq8o/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "text/plain;charset=utf-8"
-  },
-  body: JSON.stringify(data)
-})
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(data)
   })
   .then(res => res.text())
   .then(response => {
@@ -175,6 +174,7 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
     document.getElementById("msg").innerText =
       "Error submitting enquiry.";
   });
+
 });
 </script>
 
