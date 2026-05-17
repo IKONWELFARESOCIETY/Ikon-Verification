@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IKON Institute Verification</title>
+<title>IKON Verification System</title>
 
 <style>
+
+/* ===== BACKGROUND ===== */
 body{
   margin:0;
   font-family:Segoe UI;
-  background:#000;
+  background:#0a0f2c;
   color:white;
   overflow-x:hidden;
 }
 
-/* SLIDER */
+/* ===== SLIDER ===== */
 .slider{
   position:fixed;
   inset:0;
@@ -26,9 +28,10 @@ body{
   width:100%;
   height:100%;
   object-fit:contain;
-  background:#000;
+  background:black;
   opacity:0;
   transition:1.5s ease;
+  filter:brightness(1.2) contrast(1.1) saturate(1.2);
 }
 
 .slide.active{
@@ -39,11 +42,11 @@ body{
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.6);
+  background:radial-gradient(circle,rgba(0,0,0,0.4),rgba(0,0,0,0.85));
   z-index:1;
 }
 
-/* CENTER */
+/* ===== LOGIN BOX ===== */
 .center{
   position:absolute;
   top:50%;
@@ -51,73 +54,112 @@ body{
   transform:translate(-50%,-50%);
   width:90%;
   max-width:420px;
-  text-align:center;
   z-index:2;
 }
 
 .box{
   background:rgba(255,255,255,0.08);
-  padding:20px;
-  border-radius:12px;
-  backdrop-filter:blur(12px);
-}
-
-input,button{
-  width:100%;
-  padding:10px;
-  margin:5px 0;
-  border:none;
-  border-radius:8px;
-}
-
-button{
-  background:#1847d1;
-  color:white;
-  cursor:pointer;
-}
-
-/* CARD */
-.card{
-  margin-top:15px;
-  background:white;
-  color:black;
-  padding:15px;
-  border-radius:10px;
-}
-
-/* CERTIFICATE */
-.cert{
-  margin-top:15px;
-  background:white;
-  color:black;
+  backdrop-filter:blur(18px);
+  border-radius:18px;
   padding:25px;
-  border:10px solid #1847d1;
+  border:1px solid rgba(255,255,255,0.2);
   text-align:center;
 }
 
-.cert img{
-  width:130px;
-  height:150px;
-  object-fit:cover;
-  border:3px solid #1847d1;
-  margin-bottom:10px;
+h1{
+  margin:0;
+  font-size:30px;
+  background:linear-gradient(90deg,#fff,#ffd700,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* MOBILE FIX */
+input{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:none;
+  border-radius:10px;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#1847d1,#0f2d85);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ===== RESULT ===== */
+.result{
+  margin-top:15px;
+  text-align:left;
+}
+
+.card{
+  background:white;
+  color:black;
+  padding:15px;
+  border-radius:12px;
+  margin-top:10px;
+}
+
+/* ===== CERTIFICATE ===== */
+.certificate{
+  background:white;
+  color:black;
+  margin-top:15px;
+  padding:35px;
+  border:12px solid #1847d1;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.certificate h2{
+  color:#1847d1;
+  margin:10px 0;
+}
+
+/* ===== PHOTO FIX (REG NO IMAGE) ===== */
+.photo{
+  width:140px;
+  height:160px;
+  object-fit:cover;
+  border:3px solid #1847d1;
+  margin:10px 0;
+  border-radius:6px;
+}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  padding:6px 15px;
+  background:#1847d1;
+  color:white;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* MOBILE IMAGE FIX ONLY */
 @media(max-width:768px){
   .slide{
     object-fit:contain;
-    background:#000;
   }
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- SLIDER -->
 <div class="slider">
-  <img src="img1.jpeg" class="slide active">
-  <img src="img2.jpeg" class="slide">
+  <img src="img2.jpeg" class="slide active">
   <img src="img3.jpeg" class="slide">
   <img src="img4.jpeg" class="slide">
   <img src="img5.jpeg" class="slide">
@@ -133,30 +175,32 @@ button{
 
 <div class="overlay"></div>
 
+<!-- LOGIN -->
 <div class="center">
 
 <div class="box">
 
-<h2>IKON LOGIN</h2>
+<h1>IKON INSTITUTE</h1>
+<p>Certificate Verification Portal</p>
 
-<input id="reg" placeholder="Reg No">
-<input id="dob" placeholder="DOB">
+<input id="reg" placeholder="Registration Number">
+<input id="dob" placeholder="DOB (DDMMYYYY)">
 <button onclick="login()">Login</button>
 
-<div id="out"></div>
+<div id="output" class="result"></div>
 
 </div>
+
 </div>
 
 <script>
 
+/* 🔥 YOUR API */
 const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
 /* SLIDER */
 let slides=document.querySelectorAll(".slide");
 let i=0;
-
-slides[0].classList.add("active");
 
 setInterval(()=>{
   slides[i].classList.remove("active");
@@ -170,32 +214,25 @@ async function login(){
 let reg=document.getElementById("reg").value;
 let dob=document.getElementById("dob").value;
 
-let res=await fetch(API,{
-method:"POST",
-body:JSON.stringify({reg,dob})
-});
-
+let res=await fetch(API+"?reg="+reg+"&dob="+dob);
 let d=await res.json();
 
 if(d.status==="FOUND"){
 
-document.getElementById("out").innerHTML=`
+document.getElementById("output").innerHTML=`
 
 <div class="card">
-<h3>STUDENT DETAILS</h3>
-<p><b>Name:</b> ${d.name}</p>
-<p><b>Reg No:</b> ${d.reg}</p>
-<p><b>Course:</b> ${d.course}</p>
-<p><b>Grade:</b> ${d.grade}</p>
-<p><b>Start:</b> ${d.start}</p>
-<p><b>End:</b> ${d.end}</p>
+<b>Name:</b> ${d.name}<br>
+<b>Reg No:</b> ${d.reg}<br>
+<b>Course:</b> ${d.course}<br>
+<b>Grade:</b> ${d.grade}<br>
+<b>Start:</b> ${d.start}<br>
+<b>End:</b> ${d.end}
 </div>
 
-<div class="card">
-<h3>UNLOCK CERTIFICATE</h3>
-<input id="udob" placeholder="Enter DOB">
-<button onclick="unlockCert('${d.dob}','${d.name}','${d.reg}','${d.course}','${d.grade}','${d.start}','${d.end}')">Unlock</button>
-</div>
+<button onclick="unlockCert('${d.name}','${d.reg}','${d.course}','${d.grade}','${d.start}','${d.end}','${d.dob}')">
+Unlock Certificate
+</button>
 
 `;
 
@@ -206,9 +243,9 @@ alert("Invalid Credentials");
 }
 
 /* CERTIFICATE */
-function unlockCert(dob,name,reg,course,grade,start,end){
+function unlockCert(name,reg,course,grade,start,end,dob){
 
-let enter=document.getElementById("udob").value;
+let enter=prompt("Enter DOB to unlock certificate");
 
 if(enter!==dob){
 alert("Wrong DOB");
@@ -217,20 +254,24 @@ return;
 
 let today=new Date().toLocaleDateString();
 
-document.getElementById("out").innerHTML+=`
+document.getElementById("output").innerHTML+=`
 
-<div class="cert">
+<div class="certificate">
 
-<img src="photos/${reg}.jpeg"
+<div class="badge">VERIFIED</div>
+
+<!-- ✔ FIXED PHOTO (REG NO BASED) -->
+<img class="photo"
+src="${reg}.jpeg"
 onerror="this.style.display='none'">
 
 <h2>IKON WELFARE SOCIETY</h2>
 <h3>CERTIFICATE OF COMPLETION</h3>
 
-<p>This certifies that</p>
+<p>This is to certify that</p>
 <h2>${name}</h2>
 
-<p><b>Reg:</b> ${reg}</p>
+<p><b>Reg No:</b> ${reg}</p>
 <p><b>Course:</b> ${course}</p>
 <p><b>Grade:</b> ${grade}</p>
 <p><b>Duration:</b> ${start} - ${end}</p>
