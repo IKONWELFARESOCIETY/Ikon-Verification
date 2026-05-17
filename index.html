@@ -11,7 +11,7 @@
         content="Official certificate verification portal of IKON Welfare Society. Verify student certificates online using registration number and DOB.">
 
   <meta name="keywords"
-        content="IKON Welfare Society, certificate verification, IKON Institute, student certificate verification">
+        content="IKON Welfare Society, certificate verification, IKON Institute">
 
 <style>
 body{
@@ -21,7 +21,6 @@ body{
   padding:20px;
   color:#222;
 }
-
 .card{
   max-width:900px;
   margin:auto;
@@ -30,28 +29,23 @@ body{
   box-shadow:0 4px 20px rgba(0,0,0,.08);
   overflow:hidden;
 }
-
 .header{
   text-align:center;
   padding:25px;
   background:linear-gradient(135deg,#1847d1,#0f2d85);
   color:white;
 }
-
 .header img{
   max-width:120px;
 }
-
 .title{
   font-size:34px;
   font-weight:bold;
 }
-
 .subtitle{
   font-size:16px;
   margin-top:6px;
 }
-
 .verified{
   background:#eafaf0;
   color:#117a37;
@@ -60,36 +54,30 @@ body{
   font-size:22px;
   font-weight:bold;
 }
-
 .details{
   padding:24px;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:16px;
 }
-
 .item{
   background:#f8fafc;
   padding:14px;
   border-radius:10px;
 }
-
 .label{
   font-size:12px;
   color:#666;
   text-transform:uppercase;
 }
-
 .value{
   font-size:18px;
   font-weight:600;
   margin-top:4px;
 }
-
 .pdf{
   padding:24px;
 }
-
 .error{
   text-align:center;
   padding:40px;
@@ -178,6 +166,9 @@ function loginStudent(){
 }
 
 function showStudent(student){
+
+  window.currentStudent = student;
+
   app.innerHTML = `
     <div class="header">
       <img src="ikon.jpg">
@@ -230,9 +221,8 @@ function showStudent(student){
              placeholder="e.g. 12052001"
              style="padding:10px;width:200px;">
 
-      <button
-        onclick='checkDOB(${JSON.stringify(student)})'
-        style="padding:10px 15px;">
+      <button onclick="checkDOB()"
+              style="padding:10px 15px;">
         Unlock
       </button>
 
@@ -245,7 +235,10 @@ function showStudent(student){
   `;
 }
 
-function checkDOB(student){
+function checkDOB(){
+
+  const student = window.currentStudent;
+
   const entered =
     document.getElementById("dobInput")
       .value.trim();
