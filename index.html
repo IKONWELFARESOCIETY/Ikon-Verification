@@ -22,12 +22,11 @@ inset:0;
 overflow:hidden;
 }
 
-/* FIXED IMAGE FIT (NO CUT ON MOBILE/LAPTOP) */
 .slide{
 position:absolute;
 width:100%;
 height:100%;
-object-fit:contain;   /* 🔥 FIX: was cover, now proper fit */
+object-fit:contain;
 background:#000;
 opacity:0;
 transition:1s;
@@ -152,7 +151,6 @@ overflow:hidden;
 box-shadow:0 25px 60px rgba(0,0,0,0.12);
 }
 
-/* watermark image */
 .cert::before{
 content:"";
 position:absolute;
@@ -162,7 +160,6 @@ background-size:380px;
 opacity:0.06;
 }
 
-/* top border */
 .cert::after{
 content:"";
 position:absolute;
@@ -221,12 +218,19 @@ font-weight:bold;
 font-size:16px;
 }
 
-/* LOCK */
+/* LOCK FIX (CLICK ISSUE SOLVED) */
+#lockBox{
+position:relative;
+z-index:10;
+}
+
 #lockBox input{
 padding:10px;
 width:250px;
 border-radius:8px;
 border:1px solid #ccc;
+position:relative;
+z-index:20;
 }
 
 #lockBox button{
@@ -287,7 +291,7 @@ cursor:pointer;
 
 <div class="glowBar">
 <span>
-DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade Skills • POWER BI • Data Mastery • SUCCESS STARTS HERE •
+DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade Skills • POWER BI • SUCCESS STARTS HERE •
 </span>
 </div>
 
@@ -372,8 +376,13 @@ document.getElementById("dReg").innerText=d.reg;
 document.getElementById("dName").innerText=d.name;
 document.getElementById("dCourse").innerText=d.course;
 document.getElementById("dGrade").innerText=d.grade;
-document.getElementById("dStart").innerText=d.StartDate;
-document.getElementById("dEnd").innerText=d.Enddate;
+
+/* FIX START DATE / END DATE */
+document.getElementById("dStart").innerText =
+d.StartDate || d.startDate;
+
+document.getElementById("dEnd").innerText =
+d.EndDate || d.endDate;
 
 }else{
 alert("Invalid Login");
@@ -381,18 +390,22 @@ alert("Invalid Login");
 
 }
 
-/* CERT OPEN */
+/* OPEN CERT */
 function openCert(){
 document.getElementById("dataPage").style.display="none";
 document.getElementById("certPage").style.display="flex";
 }
 
-/* UNLOCK */
+/* UNLOCK FIX */
 function unlockCert(){
 
-let val=document.getElementById("certDob").value;
+let input=document.getElementById("certDob");
+input.focus();
 
-if(val !== studentData.dob){
+let val=input.value.trim();
+let dob=(studentData.DOB || studentData.dob || "").trim();
+
+if(val !== dob){
 document.getElementById("msg").style.color="red";
 document.getElementById("msg").innerText="Wrong DOB ❌";
 return;
@@ -408,13 +421,18 @@ document.getElementById("cName").innerText=studentData.name;
 document.getElementById("cReg").innerText=studentData.reg;
 document.getElementById("cCourse").innerText=studentData.course;
 document.getElementById("cGrade").innerText=studentData.grade;
-document.getElementById("cStart").innerText=studentData.StartDate;
-document.getElementById("cEnd").innerText=studentData.Enddate;
+
+/* FIX DATES */
+document.getElementById("cStart").innerText =
+studentData.StartDate || studentData.startDate;
+
+document.getElementById("cEnd").innerText =
+studentData.EndDate || studentData.endDate;
 
 document.getElementById("cPhoto").src=studentData.reg+".jpg";
 
 document.getElementById("cVerify").innerText =
-"Verified On: " + studentData.verifyDate;
+"Verified On: " + (studentData.verifyDate || new Date().toLocaleDateString());
 
 }
 
