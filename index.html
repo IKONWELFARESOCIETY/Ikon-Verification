@@ -133,121 +133,302 @@ to{transform:translateX(-100%)}
 #certPage{
 display:none;
 min-height:100vh;
-background:linear-gradient(135deg,#f4f8ff,#eaf2ff);
+background:
+radial-gradient(circle at top left,#1b3fa0,#0b1638 60%),
+linear-gradient(135deg,#09111f,#132850);
 justify-content:center;
 align-items:center;
-padding:20px;
+padding:25px;
 overflow:hidden;
+position:relative;
 }
+
+/* Animated Background */
+
+#certPage::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#00c6ff22 2px,transparent 2px);
+background-size:60px 60px;
+animation:bgMove 20s linear infinite;
+opacity:.5;
+}
+
+@keyframes bgMove{
+from{
+transform:translate(0,0);
+}
+to{
+transform:translate(-120px,-120px);
+}
+}
+
+/* Main Certificate */
 
 .cert{
 position:relative;
-width:950px;
+width:1000px;
 max-width:95%;
-background:white;
-color:#111;
-padding:60px;
-border-radius:15px;
+background:
+linear-gradient(145deg,#ffffff,#f7fbff);
+padding:65px;
+border-radius:28px;
 text-align:center;
 overflow:hidden;
-box-shadow:0 25px 60px rgba(0,0,0,0.12);
+border:8px solid rgba(255,255,255,.5);
+backdrop-filter:blur(10px);
+box-shadow:
+0 0 40px rgba(0,198,255,.25),
+0 25px 80px rgba(0,0,0,.45);
 animation:
-certEntry 1s ease,
-glowPulse 3s infinite alternate;
+certEntry 1.2s ease,
+premiumGlow 4s ease-in-out infinite alternate;
 }
+
+/* Golden Border */
 
 .cert::before{
 content:"";
 position:absolute;
-inset:0;
-background:url("ikon.jpg") no-repeat center;
-background-size:380px;
-opacity:0.06;
+inset:12px;
+border-radius:20px;
+border:2px solid rgba(255,215,0,.45);
+pointer-events:none;
+animation:borderGlow 3s infinite alternate;
 }
+
+@keyframes borderGlow{
+from{
+box-shadow:0 0 10px rgba(255,215,0,.2);
+}
+to{
+box-shadow:
+0 0 25px rgba(255,215,0,.7),
+0 0 60px rgba(255,215,0,.35);
+}
+}
+
+/* Watermark */
 
 .cert::after{
 content:"";
 position:absolute;
-top:0;
-left:0;
-width:100%;
-height:5px;
-background:linear-gradient(90deg,#1847d1,#00c6ff,#1847d1);
+inset:0;
+background:url("ikon.jpg") no-repeat center;
+background-size:420px;
+opacity:.04;
+pointer-events:none;
 }
+
+/* Logo */
 
 .logo{
-width:110px;
-margin-bottom:10px;
+width:120px;
+margin-bottom:12px;
+filter:drop-shadow(0 0 15px rgba(24,71,209,.35));
+animation:logoFloat 4s ease-in-out infinite;
 }
 
-h2{
+@keyframes logoFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* Titles */
+
+.cert h2{
+font-size:32px;
+margin:8px 0;
+letter-spacing:4px;
 color:#1847d1;
-margin:5px 0;
-letter-spacing:2px;
+font-weight:800;
+text-transform:uppercase;
 }
 
-h1{
-font-size:28px;
-margin:10px 0;
+.cert h1{
+font-size:42px;
+margin:15px 0;
+font-weight:900;
+background:linear-gradient(90deg,#1847d1,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:titleGlow 2s infinite alternate;
 }
+
+@keyframes titleGlow{
+from{
+filter:drop-shadow(0 0 5px rgba(24,71,209,.2));
+}
+to{
+filter:drop-shadow(0 0 20px rgba(0,198,255,.6));
+}
+}
+
+/* Photo */
 
 .photo{
-width:140px;
-height:170px;
+width:150px;
+height:180px;
 object-fit:cover;
-border:4px solid #1847d1;
-border-radius:12px;
-margin:15px auto;
-box-shadow:0 10px 20px rgba(0,0,0,0.1);
+border-radius:18px;
+border:5px solid #1847d1;
+margin:20px auto;
+box-shadow:
+0 10px 25px rgba(0,0,0,.18),
+0 0 30px rgba(0,198,255,.35);
 animation:photoFloat 3s ease-in-out infinite;
 }
+
+@keyframes photoFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* Student Name */
+
+#cName{
+font-size:34px;
+font-weight:800;
+color:#0d1d4d;
+margin:15px 0;
+letter-spacing:1px;
+animation:namePulse 2s infinite alternate;
+}
+
+@keyframes namePulse{
+from{
+transform:scale(1);
+}
+to{
+transform:scale(1.03);
+}
+}
+
+/* Info Grid */
 
 .certGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:20px;
-font-size:16px;
+gap:18px;
+margin-top:28px;
 }
 
 .certGrid div{
-background:#f7faff;
-padding:10px;
-border-radius:8px;
-border:1px solid #e3edff;
+background:linear-gradient(135deg,#f7fbff,#eef5ff);
+padding:16px;
+border-radius:16px;
+border:1px solid #d7e6ff;
+font-size:17px;
+font-weight:500;
+transition:.3s;
+box-shadow:0 5px 12px rgba(0,0,0,.05);
 }
+
+.certGrid div:hover{
+transform:translateY(-5px) scale(1.02);
+box-shadow:0 10px 25px rgba(24,71,209,.18);
+}
+
+/* Verify Text */
 
 .verify{
-margin-top:20px;
-color:#1a7f37;
-font-weight:bold;
-font-size:16px;
-animation:blinkGlow 1.5s infinite alternate;
+margin-top:28px;
+font-size:19px;
+font-weight:700;
+color:#11a84b;
+animation:verifyGlow 1.5s infinite alternate;
 }
 
-/* LOCK FIX */
+@keyframes verifyGlow{
+from{
+text-shadow:0 0 8px #11a84b;
+}
+to{
+text-shadow:
+0 0 18px #11a84b,
+0 0 35px #11a84b;
+}
+}
+
+/* Unlock Box */
+
 #lockBox{
 position:relative;
 z-index:10;
+margin-top:20px;
+}
+
+#lockBox p{
+font-size:18px;
+font-weight:600;
+color:#1847d1;
 }
 
 #lockBox input{
-padding:10px;
-width:250px;
-border-radius:8px;
-border:1px solid #ccc;
-position:relative;
-z-index:20;
+padding:12px;
+width:270px;
+border-radius:12px;
+border:2px solid #d0defc;
+font-size:16px;
+outline:none;
+transition:.3s;
+}
+
+#lockBox input:focus{
+border-color:#1847d1;
+box-shadow:0 0 15px rgba(24,71,209,.25);
 }
 
 #lockBox button{
-margin-top:10px;
-padding:10px 20px;
-background:#1847d1;
+margin-top:14px;
+padding:12px 24px;
+background:linear-gradient(90deg,#1847d1,#00c6ff);
 color:white;
 border:none;
-border-radius:8px;
+border-radius:12px;
+font-size:16px;
+font-weight:700;
 cursor:pointer;
+transition:.3s;
+}
+
+#lockBox button:hover{
+transform:scale(1.05);
+box-shadow:0 10px 25px rgba(0,198,255,.35);
+}
+
+/* Entry Animation */
+
+@keyframes certEntry{
+0%{
+transform:scale(.7) rotateX(35deg);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+/* Premium Glow */
+
+@keyframes premiumGlow{
+from{
+box-shadow:
+0 0 30px rgba(0,198,255,.15),
+0 25px 80px rgba(0,0,0,.45);
+}
+to{
+box-shadow:
+0 0 60px rgba(0,198,255,.35),
+0 0 120px rgba(24,71,209,.2),
+0 25px 80px rgba(0,0,0,.45);
+}
 }
 
 /* ================= EFFECTS ================= */
@@ -286,45 +467,6 @@ transform:scale(1);
 transform:translateY(-120vh) scale(0);
 opacity:0;
 }
-}
-
-@keyframes certEntry{
-0%{
-transform:scale(0.7) rotateX(30deg);
-opacity:0;
-}
-100%{
-transform:scale(1);
-opacity:1;
-}
-}
-
-@keyframes glowPulse{
-from{
-box-shadow:0 0 25px rgba(24,71,209,0.25);
-}
-to{
-box-shadow:
-0 0 40px rgba(0,198,255,0.5),
-0 0 80px rgba(24,71,209,0.25);
-}
-}
-
-@keyframes blinkGlow{
-from{
-text-shadow:0 0 5px #00ff88;
-}
-to{
-text-shadow:
-0 0 10px #00ff88,
-0 0 20px #00ff88;
-}
-}
-
-@keyframes photoFloat{
-0%{transform:translateY(0)}
-50%{transform:translateY(-8px)}
-100%{transform:translateY(0)}
 }
 
 </style>
@@ -425,7 +567,6 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 
 </div>
 
-<!-- CONFETTI -->
 <canvas id="confetti"></canvas>
 
 <script>
@@ -514,27 +655,72 @@ document.getElementById("cStartDate").innerText =
 document.getElementById("cEndDate").innerText =
 (studentData.EndDate ?? "-");
 
-/* IMAGE FIX */
 document.getElementById("cPhoto").src =
 ((studentData.reg || "").trim()) + ".jpeg?v=" + Date.now();
 
 document.getElementById("cVerify").innerText =
-"Verified On: " + (studentData.verifyDate || new Date().toLocaleDateString());
+"Verified On: " + (
+studentData.verifyDate ||
+studentData.VerifyDate ||
+studentData.verificationDate ||
+studentData.VerificationDate ||
+"-"
+);
 
-/* START EFFECTS */
+/* EFFECTS */
+
 createConfetti();
 createSparkles();
 
 /* SUCCESS SOUND */
+
 let audio = new Audio(
 "https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"
 );
 
 audio.play();
 
+/* FIREWORK BURST */
+
+for(let i=0;i<25;i++){
+
+let burst=document.createElement("div");
+
+burst.style.position="fixed";
+burst.style.width="12px";
+burst.style.height="12px";
+burst.style.borderRadius="50%";
+burst.style.left=Math.random()*100+"vw";
+burst.style.top=Math.random()*100+"vh";
+burst.style.background=
+`hsl(${Math.random()*360},100%,50%)`;
+
+burst.style.boxShadow=
+"0 0 20px rgba(255,255,255,.8)";
+
+burst.style.zIndex="9999";
+
+burst.animate([
+{
+transform:"scale(0)",
+opacity:1
+},
+{
+transform:"scale(4)",
+opacity:0
+}
+],{
+duration:1500,
+iterations:Infinity
+});
+
+document.body.appendChild(burst);
+
 }
 
-/* ================= CONFETTI EFFECT ================= */
+}
+
+/* CONFETTI */
 
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
@@ -605,7 +791,7 @@ p.x = Math.random()*canvas.width;
 
 }
 
-/* ================= SPARKLES ================= */
+/* SPARKLES */
 
 function createSparkles(){
 
