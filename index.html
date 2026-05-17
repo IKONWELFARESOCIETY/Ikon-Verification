@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IKON Verification System</title>
+<title>IKON Verification Pro</title>
 
 <style>
 
@@ -38,7 +38,7 @@ body{
   opacity:1;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
@@ -46,7 +46,7 @@ body{
   z-index:1;
 }
 
-/* ===== LOGIN BOX ===== */
+/* ===== LOGIN ===== */
 .center{
   position:absolute;
   top:50%;
@@ -62,8 +62,8 @@ body{
   backdrop-filter:blur(18px);
   border-radius:18px;
   padding:25px;
-  border:1px solid rgba(255,255,255,0.2);
   text-align:center;
+  border:1px solid rgba(255,255,255,0.2);
 }
 
 h1{
@@ -80,7 +80,6 @@ input{
   margin:6px 0;
   border:none;
   border-radius:10px;
-  outline:none;
 }
 
 button{
@@ -105,51 +104,107 @@ button{
   color:black;
   padding:15px;
   border-radius:12px;
-  margin-top:10px;
 }
 
-/* ===== CERTIFICATE ===== */
+/* ================= CERTIFICATE ================= */
 .certificate{
   background:white;
   color:black;
   margin-top:15px;
-  padding:35px;
+  padding:40px;
   border:12px solid #1847d1;
-  border-radius:10px;
+  border-radius:12px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+  box-shadow:0 25px 60px rgba(0,0,0,0.6);
+  position:relative;
 }
 
-.certificate h2{
+/* LOGO TOP CENTER */
+.cert-logo{
+  width:120px;
+  margin-bottom:10px;
+}
+
+/* TITLE */
+.cert-title{
+  font-size:28px;
+  font-weight:bold;
   color:#1847d1;
-  margin:10px 0;
 }
 
-/* ===== PHOTO FIX (REG NO IMAGE) ===== */
+/* SLOGAN ANIMATION */
+.slogan{
+  margin:10px 0;
+  font-weight:bold;
+  color:#444;
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:3px solid #1847d1;
+  animation:typing 6s steps(40,end) infinite;
+}
+
+@keyframes typing{
+  0%{width:0}
+  50%{width:100%}
+  100%{width:0}
+}
+
+/* STUDENT PHOTO */
 .photo{
-  width:140px;
-  height:160px;
+  width:150px;
+  height:170px;
   object-fit:cover;
-  border:3px solid #1847d1;
-  margin:10px 0;
-  border-radius:6px;
+  border-radius:10px;
+  border:4px solid #1847d1;
+  margin:15px 0;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* BADGE */
-.badge{
+/* COURSE BOX SLIDER */
+.course-box{
+  margin-top:15px;
+  background:#f2f6ff;
+  padding:10px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.course-track{
   display:inline-block;
-  padding:6px 15px;
-  background:#1847d1;
-  color:white;
-  border-radius:20px;
-  font-size:12px;
+  white-space:nowrap;
+  animation:scroll 15s linear infinite;
 }
 
-/* MOBILE IMAGE FIX ONLY */
+.course-box:hover .course-track{
+  animation-play-state:paused;
+}
+
+@keyframes scroll{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+/* DOB INPUT BOX (NO ALERT) */
+.unlock-box{
+  margin-top:15px;
+  padding:15px;
+  background:#eef3ff;
+  border-radius:10px;
+}
+
+.unlock-box input{
+  width:70%;
+  padding:10px;
+  border:1px solid #ccc;
+}
+
+.unlock-box button{
+  width:25%;
+}
+
+/* MOBILE FIX */
 @media(max-width:768px){
-  .slide{
-    object-fit:contain;
-  }
+  .slide{object-fit:contain;}
 }
 
 </style>
@@ -159,29 +214,28 @@ button{
 
 <!-- SLIDER -->
 <div class="slider">
-  <img src="img2.jpg" class="slide active">
-  <img src="img3.jpg" class="slide">
-  <img src="img4.jpg" class="slide">
-  <img src="img5.jpg" class="slide">
-  <img src="img6.jpg" class="slide">
-  <img src="img7.jpg" class="slide">
-  <img src="img8.jpg" class="slide">
-  <img src="img9.jpg" class="slide">
-  <img src="img10.jpg" class="slide">
-  <img src="img11.jpg" class="slide">
-  <img src="img12.jpg" class="slide">
-  <img src="img13.jpg" class="slide">
+  <img src="img2.jpeg" class="slide active">
+  <img src="img3.jpeg" class="slide">
+  <img src="img4.jpeg" class="slide">
+  <img src="img5.jpeg" class="slide">
+  <img src="img6.jpeg" class="slide">
+  <img src="img7.jpeg" class="slide">
+  <img src="img8.jpeg" class="slide">
+  <img src="img9.jpeg" class="slide">
+  <img src="img10.jpeg" class="slide">
+  <img src="img11.jpeg" class="slide">
+  <img src="img12.jpeg" class="slide">
+  <img src="img13.jpeg" class="slide">
 </div>
 
 <div class="overlay"></div>
 
 <!-- LOGIN -->
 <div class="center">
-
 <div class="box">
 
 <h1>IKON INSTITUTE</h1>
-<p>Certificate Verification Portal</p>
+<p>Verification Portal</p>
 
 <input id="reg" placeholder="Registration Number">
 <input id="dob" placeholder="DOB (DDMMYYYY)">
@@ -190,15 +244,12 @@ button{
 <div id="output" class="result"></div>
 
 </div>
-
 </div>
 
 <script>
 
-/* 🔥 YOUR API */
 const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
-/* SLIDER */
 let slides=document.querySelectorAll(".slide");
 let i=0;
 
@@ -223,15 +274,12 @@ document.getElementById("output").innerHTML=`
 
 <div class="card">
 <b>Name:</b> ${d.name}<br>
-<b>Reg No:</b> ${d.reg}<br>
 <b>Course:</b> ${d.course}<br>
-<b>Grade:</b> ${d.grade}<br>
-<b>Start:</b> ${d.start}<br>
-<b>End:</b> ${d.end}
+<b>Grade:</b> ${d.grade}
 </div>
 
-<button onclick="unlockCert('${d.name}','${d.reg}','${d.course}','${d.grade}','${d.start}','${d.end}','${d.dob}')">
-Unlock Certificate
+<button onclick="showCert('${d.reg}','${d.name}','${d.course}','${d.grade}','${d.start}','${d.end}','${d.dob}')">
+View Certificate
 </button>
 
 `;
@@ -243,43 +291,57 @@ alert("Invalid Credentials");
 }
 
 /* CERTIFICATE */
-function unlockCert(name,reg,course,grade,start,end,dob){
-
-let enter=prompt("Enter DOB to unlock certificate");
-
-if(enter!==dob){
-alert("Wrong DOB");
-return;
-}
-
-let today=new Date().toLocaleDateString();
+function showCert(reg,name,course,grade,start,end,dob){
 
 document.getElementById("output").innerHTML+=`
 
 <div class="certificate">
 
-<div class="badge">VERIFIED</div>
+<img src="ikon.jpeg" class="cert-logo">
 
-<!-- ✔ FIXED PHOTO (REG NO BASED) -->
-<img class="photo"
-src="${reg}.jpeg"
-onerror="this.style.display='none'">
+<div class="cert-title">IKON WELFARE SOCIETY</div>
 
-<h2>IKON WELFARE SOCIETY</h2>
-<h3>CERTIFICATE OF COMPLETION</h3>
+<div class="slogan">
+DCA • ADCA • PGDAM • POWER BI • BUILD YOUR FUTURE • SUCCESS STARTS HERE
+</div>
 
-<p>This is to certify that</p>
+<img class="photo" src="${reg}.jpeg" onerror="this.style.display='none'">
+
 <h2>${name}</h2>
+<p><b>${reg}</b></p>
 
-<p><b>Reg No:</b> ${reg}</p>
-<p><b>Course:</b> ${course}</p>
-<p><b>Grade:</b> ${grade}</p>
-<p><b>Duration:</b> ${start} - ${end}</p>
+<div class="course-box">
+<div class="course-track">
+DCA • ADCA • PGDAM • POWER BI • ADVANCE EXCEL • DIGITAL SKILLS • CAREER GROWTH • SUCCESS MINDSET
+</div>
+</div>
 
-<p><b>Verification Date:</b> ${today}</p>
+<div class="unlock-box">
+<input id="unlockDob" placeholder="Enter DOB">
+<button onclick="verify('${dob}')">Unlock</button>
+</div>
+
+<div id="certData"></div>
 
 </div>
 
+`;
+
+}
+
+/* VERIFY DOB INLINE */
+function verify(realDob){
+
+let val=document.getElementById("unlockDob").value;
+
+if(val!==realDob){
+alert("Wrong DOB");
+return;
+}
+
+document.getElementById("certData").innerHTML=`
+<p><b>Certificate Unlocked ✔</b></p>
+<p>Verification Date: ${new Date().toLocaleDateString()}</p>
 `;
 
 }
