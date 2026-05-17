@@ -11,19 +11,46 @@ body{
   margin:0;
   font-family:Segoe UI, sans-serif;
   background:#000;
+  overflow:hidden;
   color:white;
 }
 
-/* HERO */
-.hero{
-  position:relative;
-  width:100%;
-  height:100vh;
-  overflow:hidden;
+/* ================= PARTICLES ================= */
+#particles{
+  position:fixed;
+  inset:0;
+  z-index:0;
 }
 
-/* SLIDER IMAGES */
-.bg-slide{
+.particle{
+  position:absolute;
+  width:5px;
+  height:5px;
+  background:rgba(255,255,255,0.8);
+  border-radius:50%;
+  animation:floatUp linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(100vh) scale(0.5);
+    opacity:0;
+  }
+  to{
+    transform:translateY(-10vh) scale(1);
+    opacity:1;
+  }
+}
+
+/* ================= SLIDER ================= */
+.slider{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+
+.slide{
   position:absolute;
   width:100%;
   height:100%;
@@ -31,39 +58,25 @@ body{
   opacity:0;
   transform:scale(1.15);
   transition:all 1.5s ease;
-  filter:brightness(1.4) contrast(1.2) saturate(1.4);
+
+  /* ⭐ bright cinematic effect */
+  filter:brightness(1.4) contrast(1.2) saturate(1.5);
 }
 
-.bg-slide.active{
+.slide.active{
   opacity:1;
   transform:scale(1);
 }
 
-/* DARK OVERLAY (LIGHT) */
-.hero::after{
-  content:"";
+/* ================= OVERLAY ================= */
+.overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.45)
-  );
+  background:radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.6));
+  z-index:2;
 }
 
-/* LIGHT GLOW EFFECT */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 50%),
-    radial-gradient(circle at 70% 60%, rgba(255,215,0,0.06), transparent 55%);
-  pointer-events:none;
-}
-
-/* CENTER BOX */
+/* ================= CENTER LOGIN ================= */
 .center{
   position:absolute;
   top:50%;
@@ -72,16 +85,17 @@ body{
   text-align:center;
   width:90%;
   max-width:400px;
-  z-index:5;
+  z-index:3;
 }
 
-/* LOGIN GLASS BOX */
+/* GLASS BOX */
 .login-box{
   background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(15px);
+  backdrop-filter:blur(18px);
   border:1px solid rgba(255,255,255,0.2);
   border-radius:18px;
   padding:25px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* TITLE */
@@ -93,6 +107,16 @@ h1{
   -webkit-text-fill-color:transparent;
 }
 
+/* BADGE */
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.12);
+  margin-bottom:10px;
+}
+
 /* INPUT */
 input{
   width:100%;
@@ -100,6 +124,7 @@ input{
   margin:8px 0;
   border:none;
   border-radius:10px;
+  outline:none;
 }
 
 /* BUTTON */
@@ -111,37 +136,19 @@ button{
   background:#1847d1;
   color:white;
   cursor:pointer;
+  transition:0.3s;
 }
 
 button:hover{
   background:#0f2d85;
+  transform:scale(1.03);
 }
 
-/* CAPTION */
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  font-size:12px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.15);
-  margin-bottom:10px;
-}
-
-/* ================= MOBILE FIX ================= */
+/* MOBILE FIX */
 @media(max-width:768px){
-  .hero{
-    height:260px;
-  }
-
-  .bg-slide{
-    object-fit:contain;   /* ⭐ no image cut */
+  .slide{
+    object-fit:contain;  /* no cut on phone */
     background:#000;
-  }
-}
-
-@media(max-width:480px){
-  .hero{
-    height:220px;
   }
 }
 </style>
@@ -149,44 +156,49 @@ button:hover{
 
 <body>
 
-<div class="hero">
+<!-- PARTICLES -->
+<div id="particles"></div>
 
-  <!-- 13 IMAGES -->
-  <img src="img1.jpeg" class="bg-slide active">
-  <img src="img2.jpeg" class="bg-slide">
-  <img src="img3.jpeg" class="bg-slide">
-  <img src="img4.jpeg" class="bg-slide">
-  <img src="img5.jpeg" class="bg-slide">
-  <img src="img6.jpeg" class="bg-slide">
-  <img src="img7.jpeg" class="bg-slide">
-  <img src="img8.jpeg" class="bg-slide">
-  <img src="img9.jpeg" class="bg-slide">
-  <img src="img10.jpeg" class="bg-slide">
-  <img src="img11.jpeg" class="bg-slide">
-  <img src="img12.jpeg" class="bg-slide">
-  <img src="img13.jpeg" class="bg-slide">
+<!-- SLIDER (13 IMAGES) -->
+<div class="slider">
+  <img src="img1.jpeg" class="slide active">
+  <img src="img2.jpeg" class="slide">
+  <img src="img3.jpeg" class="slide">
+  <img src="img4.jpeg" class="slide">
+  <img src="img5.jpeg" class="slide">
+  <img src="img6.jpeg" class="slide">
+  <img src="img7.jpeg" class="slide">
+  <img src="img8.jpeg" class="slide">
+  <img src="img9.jpeg" class="slide">
+  <img src="img10.jpeg" class="slide">
+  <img src="img11.jpeg" class="slide">
+  <img src="img12.jpeg" class="slide">
+  <img src="img13.jpeg" class="slide">
+</div>
 
-  <!-- CENTER LOGIN -->
-  <div class="center">
+<!-- OVERLAY -->
+<div class="overlay"></div>
 
-    <div class="badge">WELCOME TO</div>
-    <h1>IKON INSTITUTE</h1>
+<!-- CENTER LOGIN -->
+<div class="center">
 
-    <div class="login-box">
-      <input type="text" placeholder="Registration Number">
-      <input type="password" placeholder="DOB (DDMMYYYY)">
-      <button>Login</button>
-    </div>
+  <div class="badge">WELCOME TO</div>
+  <h1>IKON INSTITUTE</h1>
 
+  <div class="login-box">
+    <input type="text" placeholder="Registration Number">
+    <input type="password" placeholder="DOB (DDMMYYYY)">
+    <button>Login</button>
   </div>
 
 </div>
 
 <script>
+/* ================= SLIDER ================= */
 let i = 0;
 
 setInterval(()=>{
-  const slides = document.querySelectorAll(".bg-slide");
+  const slides = document.querySelectorAll(".slide");
 
   slides.forEach(s => s.classList.remove("active"));
 
@@ -195,6 +207,24 @@ setInterval(()=>{
   slides[i].classList.add("active");
 
 },3000);
+
+/* ================= PARTICLES ================= */
+const container = document.getElementById("particles");
+
+function createParticle(){
+  const p = document.createElement("div");
+  p.classList.add("particle");
+
+  p.style.left = Math.random()*100 + "vw";
+  p.style.animationDuration = (5 + Math.random()*6) + "s";
+  p.style.opacity = Math.random();
+
+  container.appendChild(p);
+
+  setTimeout(()=>p.remove(),10000);
+}
+
+setInterval(createParticle,150);
 </script>
 
 </body>
