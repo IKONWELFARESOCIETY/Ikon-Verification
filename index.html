@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>IKON INSTITUTE - PORTAL</title>
+<title>IKON Institute Portal</title>
 
 <style>
 body{
@@ -12,24 +12,17 @@ body{
   font-family:Segoe UI, sans-serif;
   background:#000;
   color:white;
-  overflow-x:hidden;
 }
 
-/* ===== HERO WRAPPER ===== */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0.35)
-  );
+/* HERO */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
 }
 
-/* BACKGROUND SLIDER */
+/* SLIDER IMAGES */
 .bg-slide{
   position:absolute;
   width:100%;
@@ -38,15 +31,7 @@ body{
   opacity:0;
   transform:scale(1.15);
   transition:all 1.5s ease;
-
-  filter:brightness(1.35) contrast(1.15) saturate(1.4);
-}
-
-.bg-slide.active{
-  opacity:1;
-  transform:scale(1);
-  filter:brightness(1.45) contrast(1.2) saturate(1.6)
-  drop-shadow(0 0 20px rgba(255,255,255,0.15));
+  filter:brightness(1.4) contrast(1.2) saturate(1.4);
 }
 
 .bg-slide.active{
@@ -54,53 +39,67 @@ body{
   transform:scale(1);
 }
 
-/* DARK OVERLAY */
+/* DARK OVERLAY (LIGHT) */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.45)
+  );
 }
 
-/* CENTER CONTENT */
+/* LIGHT GLOW EFFECT */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(255,215,0,0.06), transparent 55%);
+  pointer-events:none;
+}
+
+/* CENTER BOX */
 .center{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   text-align:center;
-  z-index:5;
   width:90%;
   max-width:400px;
+  z-index:5;
 }
 
-/* GLASS LOGIN BOX */
+/* LOGIN GLASS BOX */
 .login-box{
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(15px);
   border:1px solid rgba(255,255,255,0.2);
   border-radius:18px;
   padding:25px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
-  animation:fadeUp 1s ease;
 }
 
-.login-box h2{
-  margin-bottom:15px;
-  font-size:24px;
+/* TITLE */
+h1{
+  margin:0;
+  font-size:34px;
   background:linear-gradient(90deg,#fff,#ffd700,#fff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-/* INPUTS */
+/* INPUT */
 input{
   width:100%;
   padding:12px;
   margin:8px 0;
   border:none;
   border-radius:10px;
-  outline:none;
 }
 
 /* BUTTON */
@@ -111,63 +110,39 @@ button{
   border-radius:10px;
   background:#1847d1;
   color:white;
-  font-size:16px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 button:hover{
   background:#0f2d85;
-  transform:scale(1.03);
 }
 
 /* CAPTION */
-.caption{
-  margin-bottom:20px;
-}
-
-.caption .badge{
+.badge{
   display:inline-block;
   padding:6px 12px;
   font-size:12px;
   border-radius:20px;
   background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.3);
   margin-bottom:10px;
 }
 
-.caption h1{
-  font-size:36px;
-  margin:5px 0;
-  background:linear-gradient(90deg,#fff,#ffd700,#fff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+/* ================= MOBILE FIX ================= */
+@media(max-width:768px){
+  .hero{
+    height:260px;
+  }
+
+  .bg-slide{
+    object-fit:contain;   /* ⭐ no image cut */
+    background:#000;
+  }
 }
 
-.caption p{
-  font-size:14px;
-  opacity:0.8;
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* MOBILE */
-@media(max-width:600px){
-  .caption h1{font-size:28px;}
-}
-  .hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 50%),
-    radial-gradient(circle at 70% 60%, rgba(255,215,0,0.06), transparent 55%);
-  z-index:2;
-  pointer-events:none;
+@media(max-width:480px){
+  .hero{
+    height:220px;
+  }
 }
 </style>
 </head>
@@ -194,18 +169,12 @@ button:hover{
   <!-- CENTER LOGIN -->
   <div class="center">
 
-    <div class="caption">
-      <div class="badge">WELCOME TO</div>
-      <h1>IKON INSTITUTE</h1>
-      <p>A Symbol of Success & Bright Future</p>
-    </div>
+    <div class="badge">WELCOME TO</div>
+    <h1>IKON INSTITUTE</h1>
 
     <div class="login-box">
-      <h2>Student Login</h2>
-
       <input type="text" placeholder="Registration Number">
-      <input type="password" placeholder="Date of Birth (DDMMYYYY)">
-
+      <input type="password" placeholder="DOB (DDMMYYYY)">
       <button>Login</button>
     </div>
 
@@ -225,7 +194,7 @@ setInterval(()=>{
 
   slides[i].classList.add("active");
 
-}, 3000);
+},3000);
 </script>
 
 </body>
