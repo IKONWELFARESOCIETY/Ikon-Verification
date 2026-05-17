@@ -218,7 +218,7 @@ font-weight:bold;
 font-size:16px;
 }
 
-/* LOCK FIX (CLICK ISSUE SOLVED) */
+/* LOCK FIX */
 #lockBox{
 position:relative;
 z-index:10;
@@ -377,12 +377,12 @@ document.getElementById("dName").innerText=d.name;
 document.getElementById("dCourse").innerText=d.course;
 document.getElementById("dGrade").innerText=d.grade;
 
-/* FIX START DATE / END DATE */
+/* FIX START / END DATE */
 document.getElementById("dStartDate").innerText =
-d.StartDate || d.StartDate;
+d.StartDate || d.startDate || "-";
 
 document.getElementById("dEndDate").innerText =
-d.EndDate || d.EndDate;
+d.EndDate || d.endDate || "-";
 
 }else{
 alert("Invalid Login");
@@ -396,7 +396,7 @@ document.getElementById("dataPage").style.display="none";
 document.getElementById("certPage").style.display="flex";
 }
 
-/* UNLOCK FIX */
+/* UNLOCK */
 function unlockCert(){
 
 let input=document.getElementById("certDob");
@@ -423,13 +423,15 @@ document.getElementById("cCourse").innerText=studentData.course;
 document.getElementById("cGrade").innerText=studentData.grade;
 
 /* FIX DATES */
-document.getElementById("cStart").innerText =
-studentData.StartDate || studentData.startDate;
+document.getElementById("cStartDate").innerText =
+studentData.StartDate || studentData.startDate || "-";
 
-document.getElementById("cEnd").innerText =
-studentData.EndDate || studentData.endDate;
+document.getElementById("cEndDate").innerText =
+studentData.EndDate || studentData.endDate || "-";
 
-document.getElementById("cPhoto").src=studentData.reg+".jpg";
+/* IMAGE FIX (REPO SAFE) */
+document.getElementById("cPhoto").src =
+studentData.reg + ".jpg";
 
 document.getElementById("cVerify").innerText =
 "Verified On: " + (studentData.verifyDate || new Date().toLocaleDateString());
