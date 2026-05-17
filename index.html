@@ -3,44 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IKON Institute Certificate Verification</title>
+<title>IKON Institute Verification</title>
 
 <style>
 body{
   margin:0;
-  font-family:Segoe UI, sans-serif;
+  font-family:Segoe UI;
   background:#000;
   color:white;
-  overflow:hidden;
+  overflow-x:hidden;
 }
 
-/* ================= PARTICLES ================= */
-#particles{
+/* SLIDER */
+.slider{
   position:fixed;
   inset:0;
   z-index:0;
-}
-
-.particle{
-  position:absolute;
-  width:5px;
-  height:5px;
-  background:rgba(255,255,255,0.8);
-  border-radius:50%;
-  animation:floatUp linear infinite;
-}
-
-@keyframes floatUp{
-  from{transform:translateY(100vh);opacity:0;}
-  to{transform:translateY(-10vh);opacity:1;}
-}
-
-/* ================= SLIDER ================= */
-.slider{
-  position:absolute;
-  inset:0;
-  z-index:1;
 }
 
 .slide{
@@ -48,28 +26,24 @@ body{
   width:100%;
   height:100%;
   object-fit:contain;
-  object-position:center;
   background:#000;
   opacity:0;
-  transform:scale(1.05);
-  transition:all 1.5s ease;
-  filter:brightness(1.2) contrast(1.1) saturate(1.3);
+  transition:1.5s ease;
 }
 
 .slide.active{
   opacity:1;
-  transform:scale(1);
 }
 
-/* ================= OVERLAY ================= */
+/* OVERLAY */
 .overlay{
-  position:absolute;
+  position:fixed;
   inset:0;
-  background:radial-gradient(circle,rgba(255,255,255,0.05),rgba(0,0,0,0.7));
-  z-index:2;
+  background:rgba(0,0,0,0.6);
+  z-index:1;
 }
 
-/* ================= LOGIN ================= */
+/* CENTER */
 .center{
   position:absolute;
   top:50%;
@@ -78,60 +52,55 @@ body{
   width:90%;
   max-width:420px;
   text-align:center;
-  z-index:3;
+  z-index:2;
 }
 
-.login-box{
+.box{
   background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:16px;
-  padding:25px;
+  padding:20px;
+  border-radius:12px;
+  backdrop-filter:blur(12px);
 }
 
-/* TITLE */
-h1{
-  font-size:32px;
-  background:linear-gradient(90deg,#fff,#ffd700,#fff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-input{
+input,button{
   width:100%;
-  padding:12px;
-  margin:8px 0;
+  padding:10px;
+  margin:5px 0;
   border:none;
   border-radius:8px;
 }
 
 button{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:8px;
   background:#1847d1;
   color:white;
   cursor:pointer;
 }
 
-/* ================= CERTIFICATE ================= */
-.cert{
+/* CARD */
+.card{
+  margin-top:15px;
   background:white;
   color:black;
-  padding:30px;
-  border-radius:12px;
-  margin-top:20px;
+  padding:15px;
+  border-radius:10px;
+}
+
+/* CERTIFICATE */
+.cert{
+  margin-top:15px;
+  background:white;
+  color:black;
+  padding:25px;
+  border:10px solid #1847d1;
   text-align:center;
 }
 
-.cert h2{
-  color:#1847d1;
-}
-
-.cert-box{
-  border:10px solid #1847d1;
-  padding:25px;
+.cert img{
+  width:130px;
+  height:150px;
+  object-fit:cover;
+  border:3px solid #1847d1;
+  margin-bottom:10px;
 }
 
 /* MOBILE FIX */
@@ -139,7 +108,6 @@ button{
   .slide{
     object-fit:contain;
     background:#000;
-    height:100vh;
   }
 }
 </style>
@@ -147,10 +115,6 @@ button{
 
 <body>
 
-<!-- PARTICLES -->
-<div id="particles"></div>
-
-<!-- SLIDER -->
 <div class="slider">
   <img src="img1.jpeg" class="slide active">
   <img src="img2.jpeg" class="slide">
@@ -169,91 +133,116 @@ button{
 
 <div class="overlay"></div>
 
-<!-- LOGIN -->
 <div class="center">
 
-  <h1>IKON INSTITUTE</h1>
+<div class="box">
 
-  <div class="login-box">
-    <input id="reg" placeholder="Registration Number">
-    <input id="dob" placeholder="DOB (DDMMYYYY)">
-    <button onclick="login()">Login</button>
-  </div>
+<h2>IKON LOGIN</h2>
 
-  <div id="result"></div>
+<input id="reg" placeholder="Reg No">
+<input id="dob" placeholder="DOB">
+<button onclick="login()">Login</button>
 
+<div id="out"></div>
+
+</div>
 </div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
-/* ================= SLIDER FIX ================= */
-let slides = document.querySelectorAll(".slide");
-let index = 0;
+const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
-slides.forEach(s => s.classList.remove("active"));
+/* SLIDER */
+let slides=document.querySelectorAll(".slide");
+let i=0;
+
 slides[0].classList.add("active");
 
 setInterval(()=>{
-  slides[index].classList.remove("active");
-  index = (index + 1) % slides.length;
-  slides[index].classList.add("active");
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
 },3000);
 
-/* ================= PARTICLES ================= */
-const container = document.getElementById("particles");
-
-function createParticle(){
-  let p = document.createElement("div");
-  p.classList.add("particle");
-  p.style.left = Math.random()*100 + "vw";
-  p.style.animationDuration = (4 + Math.random()*6) + "s";
-  container.appendChild(p);
-  setTimeout(()=>p.remove(),10000);
-}
-setInterval(createParticle,150);
-
-/* ================= LOGIN + SHEET FETCH ================= */
+/* LOGIN */
 async function login(){
 
-  let reg = document.getElementById("reg").value;
-  let dob = document.getElementById("dob").value;
+let reg=document.getElementById("reg").value;
+let dob=document.getElementById("dob").value;
 
-  let res = await fetch(API_URL, {
-    method:"POST",
-    body:JSON.stringify({reg,dob})
-  });
+let res=await fetch(API,{
+method:"POST",
+body:JSON.stringify({reg,dob})
+});
 
-  let data = await res.json();
+let d=await res.json();
 
-  if(data.status === "FOUND"){
+if(d.status==="FOUND"){
 
-    document.getElementById("result").innerHTML = `
-      <div class="cert">
-        <div class="cert-box">
+document.getElementById("out").innerHTML=`
 
-          <h2>IKON WELFARE SOCIETY</h2>
-          <h3>CERTIFICATE OF COMPLETION</h3>
+<div class="card">
+<h3>STUDENT DETAILS</h3>
+<p><b>Name:</b> ${d.name}</p>
+<p><b>Reg No:</b> ${d.reg}</p>
+<p><b>Course:</b> ${d.course}</p>
+<p><b>Grade:</b> ${d.grade}</p>
+<p><b>Start:</b> ${d.start}</p>
+<p><b>End:</b> ${d.end}</p>
+</div>
 
-          <p>This is to certify that</p>
-          <h2>${data.name}</h2>
+<div class="card">
+<h3>UNLOCK CERTIFICATE</h3>
+<input id="udob" placeholder="Enter DOB">
+<button onclick="unlockCert('${d.dob}','${d.name}','${d.reg}','${d.course}','${d.grade}','${d.start}','${d.end}')">Unlock</button>
+</div>
 
-          <p><b>Reg No:</b> ${data.reg}</p>
-          <p><b>Course:</b> ${data.course}</p>
-          <p><b>Grade:</b> ${data.grade}</p>
+`;
 
-          <p><b>Duration:</b> ${data.start} to ${data.end}</p>
-
-          <p><b>Verification Date:</b> ${data.date}</p>
-
-        </div>
-      </div>
-    `;
-
-  } else {
-    alert("Invalid Login");
-  }
+}else{
+alert("Invalid Credentials");
 }
+
+}
+
+/* CERTIFICATE */
+function unlockCert(dob,name,reg,course,grade,start,end){
+
+let enter=document.getElementById("udob").value;
+
+if(enter!==dob){
+alert("Wrong DOB");
+return;
+}
+
+let today=new Date().toLocaleDateString();
+
+document.getElementById("out").innerHTML+=`
+
+<div class="cert">
+
+<img src="photos/${reg}.jpeg"
+onerror="this.style.display='none'">
+
+<h2>IKON WELFARE SOCIETY</h2>
+<h3>CERTIFICATE OF COMPLETION</h3>
+
+<p>This certifies that</p>
+<h2>${name}</h2>
+
+<p><b>Reg:</b> ${reg}</p>
+<p><b>Course:</b> ${course}</p>
+<p><b>Grade:</b> ${grade}</p>
+<p><b>Duration:</b> ${start} - ${end}</p>
+
+<p><b>Verification Date:</b> ${today}</p>
+
+</div>
+
+`;
+
+}
+
 </script>
 
 </body>
