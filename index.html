@@ -388,21 +388,26 @@ function checkDOB(correctDOB, pdfFile) {
 
         <br><br>
 
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          margin-top:40px;
-        ">
-          <div>
-            ___________________<br>
-            Director Signature
-          </div>
+       <div style="
+  margin-top:40px;
+  padding:15px;
+  background:#f8fafc;
+  border-radius:10px;
+  border:1px solid #ddd;
+  text-align:left;
+">
+  <h3 style="margin-top:0; color:#1847d1;">
+    Verification Data
+  </h3>
 
-          <div>
-            ___________________<br>
-            Official Seal
-          </div>
-        </div>
+  <p>
+    <b>Verification Status:</b> Successfully Verified
+  </p>
+
+  <p>
+    <b>Verification Date:</b> ${student["Verification Date"]}
+  </p>
+</div>
       </div>
     `;
 
