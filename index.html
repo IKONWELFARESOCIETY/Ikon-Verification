@@ -14,6 +14,46 @@
         content="IKON Welfare Society, certificate verification, IKON Institute">
 
 <style>
+  .course-slider{
+  background: linear-gradient(90deg,#1847d1,#0f2d85);
+  color:white;
+  padding:12px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.course-track{
+  display:inline-block;
+  padding-left:100%;
+  animation: scrollCourses 22s linear infinite;
+}
+
+.course-item{
+  display:inline-block;
+  margin-right:80px;
+}
+
+.course-name{
+  font-size:20px;
+  color:#ffd700;
+}
+
+.course-desc{
+  font-size:14px;
+  font-weight:normal;
+  color:#fff;
+}
+
+@keyframes scrollCourses{
+  0%{
+    transform:translateX(0);
+  }
+  100%{
+    transform:translateX(-100%);
+  }
+}
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
@@ -36,7 +76,9 @@ body{
   color:white;
 }
 .header img{
-  max-width:120px;
+  width:200px;
+  max-width:90%;
+}
 }
 .title{
   font-size:34px;
@@ -179,6 +221,39 @@ function showStudent(student){
     <div class="verified">
       ✓ CERTIFICATE VERIFIED
     </div>
+    <div class="course-slider">
+  <div class="course-track">
+
+    <span class="course-item">
+      <span class="course-name">DCA</span> —
+      <span class="course-desc">
+        Diploma in Computer Applications | Build essential computer skills for office, internet & digital work.
+      </span>
+    </span>
+
+    <span class="course-item">
+      <span class="course-name">ADCA</span> —
+      <span class="course-desc">
+        Advanced Diploma in Computer Applications | Become job-ready with advanced software, accounting & practical training.
+      </span>
+    </span>
+
+    <span class="course-item">
+      <span class="course-name">PGDAM</span> —
+      <span class="course-desc">
+        Post Graduate Diploma in Accounting & Management | Upgrade your career in finance, GST & business management.
+      </span>
+    </span>
+
+    <span class="course-item">
+      <span class="course-name">Power BI</span> —
+      <span class="course-desc">
+        Data Analytics & Interactive Dashboard Design | Master dashboards and data visualization for modern careers.
+      </span>
+    </span>
+
+  </div>
+</div>
 
     <div class="details">
       <div class="item">
@@ -268,7 +343,7 @@ function checkDOB(){
       ">
 
         <img src="ikon.jpg"
-             style="width:100px;">
+             style="width:150px;">
 
         <div style="margin:20px 0;">
           <img src="photos/${reg}.jpeg"
