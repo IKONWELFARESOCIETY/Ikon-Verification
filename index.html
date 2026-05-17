@@ -377,12 +377,11 @@ document.getElementById("dName").innerText=d.name;
 document.getElementById("dCourse").innerText=d.course;
 document.getElementById("dGrade").innerText=d.grade;
 
-/* FIX START / END DATE */
 document.getElementById("dStartDate").innerText =
-d.StartDate || d.startDate || "-";
+(studentData.StartDate ?? "-");
 
 document.getElementById("dEndDate").innerText =
-d.EndDate || d.endDate || "-";
+(studentData.EndDate ?? "-");
 
 }else{
 alert("Invalid Login");
@@ -422,16 +421,15 @@ document.getElementById("cReg").innerText=studentData.reg;
 document.getElementById("cCourse").innerText=studentData.course;
 document.getElementById("cGrade").innerText=studentData.grade;
 
-/* FIX DATES */
 document.getElementById("cStartDate").innerText =
-studentData.StartDate || studentData.startDate || "-";
+(studentData.StartDate ?? "-");
 
 document.getElementById("cEndDate").innerText =
-studentData.EndDate || studentData.endDate || "-";
+(studentData.EndDate ?? "-");
 
 /* IMAGE FIX (REPO SAFE) */
 document.getElementById("cPhoto").src =
-studentData.reg + ".jpeg";
+((studentData.reg || "").trim()) + ".jpeg?v=" + Date.now();
 
 document.getElementById("cVerify").innerText =
 "Verified On: " + (studentData.verifyDate || new Date().toLocaleDateString());
