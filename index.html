@@ -14,14 +14,75 @@
         content="IKON Welfare Society, certificate verification, IKON Institute">
 
 <style>
-  .course-slider{
-  background: linear-gradient(90deg,#1847d1,#0f2d85);
-  color:white;
-  padding:12px 0;
+ .course-slider{
+  background: linear-gradient(90deg,#0f2d85,#1847d1,#0f2d85);
+  padding:18px 0;
   overflow:hidden;
   white-space:nowrap;
-  font-weight:bold;
+  position:relative;
+  border-top:3px solid #ffd700;
+  border-bottom:3px solid #ffd700;
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.course-slider::before,
+.course-slider::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:2;
+}
+
+.course-slider::before{
+  left:0;
+  background:linear-gradient(to right,#0f2d85,transparent);
+}
+
+.course-slider::after{
+  right:0;
+  background:linear-gradient(to left,#0f2d85,transparent);
+}
+
+.course-track{
+  display:inline-block;
+  padding-left:100%;
+  animation: smoothScroll 28s linear infinite;
+}
+
+.course-slider:hover .course-track{
+  animation-play-state: paused;
+}
+
+.course-item{
+  display:inline-block;
+  margin-right:90px;
+}
+
+.course-name{
+  font-size:28px;
+  font-weight:800;
+  color:#ffd700;
+  text-shadow:
+    0 0 6px rgba(255,215,0,.7),
+    0 0 12px rgba(255,215,0,.4);
+}
+
+.course-desc{
   font-size:18px;
+  color:#ffffff;
+  font-weight:500;
+  margin-left:6px;
+}
+
+@keyframes smoothScroll{
+  0%{
+    transform:translateX(0);
+  }
+  100%{
+    transform:translateX(-100%);
+  }
 }
   .slider{
   width:100%;
