@@ -3,65 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IKON Ultra Verification</title>
+<title>IKON Verification System</title>
 
 <style>
 
-/* ================= GLOBAL ================= */
 body{
 margin:0;
 font-family:Segoe UI;
 background:#0a0f2c;
+color:white;
 }
 
-/* ================= LOGIN PAGE ================= */
+/* ================= LOGIN ================= */
 #loginPage{
 position:fixed;
 inset:0;
 overflow:hidden;
 }
 
-/* IMAGE SLIDER */
 .slide{
 position:absolute;
 width:100%;
 height:100%;
-object-fit:contain;
-background:black;
+object-fit:cover;
 opacity:0;
-transition:1.2s ease;
-filter:brightness(1.2) contrast(1.1) saturate(1.3);
+transition:1s;
+filter:brightness(1.2);
 }
 
 .slide.active{opacity:1}
 
-/* DARK OVERLAY */
 .overlay{
 position:absolute;
 inset:0;
 background:rgba(0,0,0,0.6);
 }
 
-/* LOGIN BOX */
 .loginBox{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:90%;
-max-width:400px;
-background:rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.1);
 padding:20px;
 border-radius:15px;
-backdrop-filter:blur(12px);
+width:90%;
+max-width:400px;
+backdrop-filter:blur(10px);
 text-align:center;
-color:white;
 }
 
 input,button{
 width:100%;
 padding:10px;
-margin:5px 0;
+margin:6px 0;
 border:none;
 border-radius:8px;
 }
@@ -72,29 +67,30 @@ color:white;
 cursor:pointer;
 }
 
-/* ================= AFTER LOGIN PAGE ================= */
+/* ================= DASHBOARD ================= */
 #dataPage{
 display:none;
 padding:20px;
-color:white;
+text-align:center;
 }
 
-/* COURSE GLOW SLIDER */
+/* SCROLLING COURSE BAR (ULTRA PRO) */
 .glowBar{
-background:linear-gradient(90deg,#1847d1,#0f2d85,#1847d1);
-padding:10px;
+margin-top:20px;
+background:linear-gradient(90deg,#1847d1,#00c6ff,#1847d1);
+padding:12px;
 overflow:hidden;
 white-space:nowrap;
-box-shadow:0 0 20px #1847d1;
-margin-top:10px;
+box-shadow:0 0 25px #1847d1;
+border-radius:10px;
 }
 
 .glowBar span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 12s linear infinite;
+animation:scroll 10s linear infinite;
 font-weight:bold;
-text-shadow:0 0 10px white;
+letter-spacing:1px;
 }
 
 .glowBar:hover span{
@@ -106,36 +102,80 @@ from{transform:translateX(100%)}
 to{transform:translateX(-100%)}
 }
 
-/* ================= CERT PAGE ================= */
+/* ================= CERTIFICATE ================= */
+
 #certPage{
 display:none;
-background:#f5f7ff;
 min-height:100vh;
+background:linear-gradient(135deg,#06122d,#02040f);
+justify-content:center;
+align-items:center;
 padding:20px;
 }
 
 .cert{
-max-width:750px;
-margin:auto;
+position:relative;
+width:900px;
+max-width:95%;
 background:white;
-padding:40px;
-border:10px solid #1847d1;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
 color:black;
+padding:50px;
+border-radius:12px;
+text-align:center;
+overflow:hidden;
+box-shadow:0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* watermark image */
+.cert::before{
+content:"";
+position:absolute;
+inset:0;
+background:url("ikon.jpg") no-repeat center;
+background-size:320px;
+opacity:0.08;
+}
+
+/* top line */
+.cert::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:6px;
+background:linear-gradient(90deg,#1847d1,#00c6ff,#1847d1);
 }
 
 .logo{
-width:120px;
+width:110px;
 }
 
 .photo{
-width:150px;
+width:140px;
 height:170px;
 object-fit:cover;
 border:4px solid #1847d1;
-border-radius:8px;
-margin:15px 0;
+border-radius:10px;
+margin:10px auto;
+}
+
+h2{
+color:#1847d1;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px;
+font-size:16px;
+}
+
+.verify{
+margin-top:20px;
+color:green;
+font-weight:bold;
 }
 
 </style>
@@ -143,21 +183,21 @@ margin:15px 0;
 
 <body>
 
-<!-- ================= LOGIN PAGE ================= -->
+<!-- LOGIN -->
 <div id="loginPage">
 
 <img src="img2.jpg" class="slide active">
 <img src="img3.jpg" class="slide">
 <img src="img4.jpg" class="slide">
 <img src="img5.jpg" class="slide">
-<img src="img6.jpg" class="slide">
-<img src="img7.jpg" class="slide">
-<img src="img8.jpg" class="slide">
-<img src="img9.jpg" class="slide">
-<img src="img10.jpg" class="slide">
-<img src="img11.jpg" class="slide">
-<img src="img12.jpg" class="slide">
-<img src="img13.jpg" class="slide">
+  <img src="img6.jpg" class="slide">
+  <img src="img7.jpg" class="slide">
+  <img src="img8.jpg" class="slide">
+  <img src="img9.jpg" class="slide">
+  <img src="img10.jpg" class="slide">
+  <img src="img11.jpg" class="slide">
+  <img src="img12.jpg" class="slide">
+  <img src="img13.jpg" class="slide">
 
 <div class="overlay"></div>
 
@@ -166,28 +206,29 @@ margin:15px 0;
 <input id="reg" placeholder="Reg No">
 <input id="dob" placeholder="DOB">
 <button onclick="login()">Login</button>
-<div id="result"></div>
 </div>
 
 </div>
 
-<!-- ================= DATA PAGE ================= -->
+<!-- DASHBOARD (NEW PROFESSIONAL PAGE) -->
 <div id="dataPage">
 
-<h2>Student Dashboard</h2>
+<h2>Welcome Student</h2>
 
 <div id="info"></div>
 
-<!-- COURSE GLOW AFTER LOGIN -->
+<!-- ULTRA COURSE SCROLL -->
 <div class="glowBar">
-<span>DCA • ADCA • PGDAM • POWER BI • ADVANCE EXCEL • DIGITAL SKILLS • CAREER GROWTH • SUCCESS •</span>
+<span>
+DCA • ADCA • PGDCA • ADV EXCEL • POWER BI • DIGITAL SKILLS • PROGRAMMING • CAREER GROWTH • SUCCESS •
+</span>
 </div>
 
 <button onclick="openCert()">View Certificate</button>
 
 </div>
 
-<!-- ================= CERT PAGE ================= -->
+<!-- CERTIFICATE -->
 <div id="certPage">
 
 <div class="cert">
@@ -195,23 +236,21 @@ margin:15px 0;
 <img src="ikon.jpeg" class="logo">
 
 <h2>IKON WELFARE SOCIETY</h2>
+<h1>Certificate of Completion</h1>
 
 <img id="cPhoto" class="photo">
 
 <h3 id="cName"></h3>
-<p id="cReg"></p>
-<p id="cCourse"></p>
-<p id="cGrade"></p>
 
-<input id="certDob" placeholder="Enter DOB">
-<button onclick="unlockCert()">Unlock Certificate</button>
-
-<p id="msg"></p>
-
-<!-- COURSE AGAIN IN CERT -->
-<div class="glowBar">
-<span>DCA • ADCA • PGDAM • POWER BI • SUCCESS • CAREER BUILDING • DIGITAL SKILLS •</span>
+<div class="grid">
+<div><b>Reg:</b> <span id="cReg"></span></div>
+<div><b>Course:</b> <span id="cCourse"></span></div>
+<div><b>Grade:</b> <span id="cGrade"></span></div>
+<div><b>Start:</b> <span id="cStart"></span></div>
+<div><b>End:</b> <span id="cEnd"></span></div>
 </div>
+
+<div class="verify" id="cVerify"></div>
 
 </div>
 
@@ -250,6 +289,7 @@ document.getElementById("dataPage").style.display="block";
 
 document.getElementById("info").innerHTML=`
 <p><b>Name:</b> ${d.name}</p>
+<p><b>Reg:</b> ${d.reg}</p>
 <p><b>Course:</b> ${d.course}</p>
 <p><b>Grade:</b> ${d.grade}</p>
 `;
@@ -264,30 +304,19 @@ alert("Invalid Login");
 function openCert(){
 
 document.getElementById("dataPage").style.display="none";
-document.getElementById("certPage").style.display="block";
+document.getElementById("certPage").style.display="flex";
 
 document.getElementById("cName").innerText=studentData.name;
 document.getElementById("cReg").innerText=studentData.reg;
 document.getElementById("cCourse").innerText=studentData.course;
 document.getElementById("cGrade").innerText=studentData.grade;
+document.getElementById("cStart").innerText=studentData.startDate;
+document.getElementById("cEnd").innerText=studentData.endDate;
 
-/* REG BASED PHOTO FIX (.jpg) */
-document.getElementById("cPhoto").src = studentData.reg + ".jpg";
+document.getElementById("cPhoto").src=studentData.reg+".jpg";
 
-}
-
-/* CERT UNLOCK */
-function unlockCert(){
-
-let val=document.getElementById("certDob").value;
-
-if(val!==studentData.dob){
-document.getElementById("msg").innerText="Wrong DOB";
-return;
-}
-
-document.getElementById("msg").innerHTML=
-"Certificate Verified ✔ " + new Date().toLocaleDateString();
+document.getElementById("cVerify").innerText =
+"Verified On: " + studentData.verifyDate;
 
 }
 
