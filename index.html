@@ -7,11 +7,12 @@
 
 <style>
 
+/* ================= GLOBAL ================= */
 body{
 margin:0;
 font-family:Segoe UI;
-background:#0a0f2c;
-color:white;
+background:#eef3ff;
+color:#111;
 }
 
 /* ================= LOGIN ================= */
@@ -28,7 +29,7 @@ height:100%;
 object-fit:cover;
 opacity:0;
 transition:1s;
-filter:brightness(1.2);
+filter:brightness(1.1);
 }
 
 .slide.active{opacity:1}
@@ -36,7 +37,7 @@ filter:brightness(1.2);
 .overlay{
 position:absolute;
 inset:0;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.4);
 }
 
 .loginBox{
@@ -44,12 +45,12 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(255,255,255,0.1);
-padding:20px;
+background:white;
+padding:22px;
 border-radius:15px;
 width:90%;
-max-width:400px;
-backdrop-filter:blur(10px);
+max-width:380px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 text-align:center;
 }
 
@@ -57,44 +58,65 @@ input,button{
 width:100%;
 padding:10px;
 margin:6px 0;
-border:none;
+border:1px solid #ddd;
 border-radius:8px;
 }
 
 button{
 background:#1847d1;
 color:white;
+border:none;
 cursor:pointer;
 }
 
 /* ================= DASHBOARD ================= */
 #dataPage{
 display:none;
-padding:20px;
-text-align:center;
+padding:25px;
+background:#f6f9ff;
+min-height:100vh;
 }
 
-/* SCROLLING COURSE BAR (ULTRA PRO) */
+.dashboardCard{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+max-width:800px;
+margin:auto;
+}
+
+/* 2 COLUMN DATA */
+.row{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #eee;
+font-size:16px;
+}
+
+.row b{
+color:#1847d1;
+}
+
+/* ================= COURSE BAR ================= */
 .glowBar{
 margin-top:20px;
 background:linear-gradient(90deg,#1847d1,#00c6ff,#1847d1);
 padding:12px;
 overflow:hidden;
 white-space:nowrap;
-box-shadow:0 0 25px #1847d1;
 border-radius:10px;
+box-shadow:0 0 20px rgba(24,71,209,0.4);
 }
 
 .glowBar span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 10s linear infinite;
+animation:scroll 11s linear infinite;
 font-weight:bold;
+color:white;
 letter-spacing:1px;
-}
-
-.glowBar:hover span{
-animation-play-state:paused;
 }
 
 @keyframes scroll{
@@ -107,7 +129,7 @@ to{transform:translateX(-100%)}
 #certPage{
 display:none;
 min-height:100vh;
-background:linear-gradient(135deg,#06122d,#02040f);
+background:linear-gradient(135deg,#f3f7ff,#eaf1ff);
 justify-content:center;
 align-items:center;
 padding:20px;
@@ -118,12 +140,12 @@ position:relative;
 width:900px;
 max-width:95%;
 background:white;
-color:black;
+color:#111;
 padding:50px;
 border-radius:12px;
 text-align:center;
 overflow:hidden;
-box-shadow:0 25px 60px rgba(0,0,0,0.6);
+box-shadow:0 20px 50px rgba(0,0,0,0.15);
 }
 
 /* watermark image */
@@ -132,8 +154,8 @@ content:"";
 position:absolute;
 inset:0;
 background:url("ikon.jpg") no-repeat center;
-background-size:320px;
-opacity:0.08;
+background-size:340px;
+opacity:0.06;
 }
 
 /* top line */
@@ -143,37 +165,47 @@ position:absolute;
 top:0;
 left:0;
 width:100%;
-height:6px;
+height:5px;
 background:linear-gradient(90deg,#1847d1,#00c6ff,#1847d1);
 }
 
 .logo{
-width:110px;
+width:100px;
 }
 
 .photo{
-width:140px;
-height:170px;
+width:130px;
+height:160px;
 object-fit:cover;
-border:4px solid #1847d1;
+border:3px solid #1847d1;
 border-radius:10px;
 margin:10px auto;
 }
 
 h2{
 color:#1847d1;
+margin:5px 0;
 }
 
-.grid{
+h1{
+margin:10px 0;
+font-size:24px;
+}
+
+.certGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
 margin-top:15px;
-font-size:16px;
+font-size:15px;
+}
+
+.certGrid div{
+padding:6px 0;
 }
 
 .verify{
-margin-top:20px;
+margin-top:18px;
 color:green;
 font-weight:bold;
 }
@@ -189,7 +221,7 @@ font-weight:bold;
 <img src="img2.jpg" class="slide active">
 <img src="img3.jpg" class="slide">
 <img src="img4.jpg" class="slide">
-<img src="img5.jpg" class="slide">
+  <img src="img5.jpg" class="slide">
   <img src="img6.jpg" class="slide">
   <img src="img7.jpg" class="slide">
   <img src="img8.jpg" class="slide">
@@ -210,21 +242,30 @@ font-weight:bold;
 
 </div>
 
-<!-- DASHBOARD (NEW PROFESSIONAL PAGE) -->
+<!-- DASHBOARD -->
 <div id="dataPage">
 
-<h2>Welcome Student</h2>
+<div class="dashboardCard">
 
-<div id="info"></div>
+<h2 style="text-align:center;color:#1847d1;">Student Dashboard</h2>
 
-<!-- ULTRA COURSE SCROLL -->
+<div class="row"><b>Reg No:</b> <span id="dReg"></span></div>
+<div class="row"><b>Name:</b> <span id="dName"></span></div>
+<div class="row"><b>Course:</b> <span id="dCourse"></span></div>
+<div class="row"><b>Grade:</b> <span id="dGrade"></span></div>
+<div class="row"><b>Start Date:</b> <span id="dStart"></span></div>
+<div class="row"><b>End Date:</b> <span id="dEnd"></span></div>
+
 <div class="glowBar">
 <span>
-DCA • ADCA • PGDCA • ADV EXCEL • POWER BI • DIGITAL SKILLS • PROGRAMMING • CAREER GROWTH • SUCCESS •
+DCA • ADCA • PGDAM • POWER BI • LEARN • GROW • BUILD YOUR FUTURE • SUCCESS STARTS HERE • DIGITAL SKILLS •
 </span>
 </div>
 
+<br>
 <button onclick="openCert()">View Certificate</button>
+
+</div>
 
 </div>
 
@@ -242,8 +283,8 @@ DCA • ADCA • PGDCA • ADV EXCEL • POWER BI • DIGITAL SKILLS • PROGRAM
 
 <h3 id="cName"></h3>
 
-<div class="grid">
-<div><b>Reg:</b> <span id="cReg"></span></div>
+<div class="certGrid">
+<div><b>Reg No:</b> <span id="cReg"></span></div>
 <div><b>Course:</b> <span id="cCourse"></span></div>
 <div><b>Grade:</b> <span id="cGrade"></span></div>
 <div><b>Start:</b> <span id="cStart"></span></div>
@@ -287,12 +328,13 @@ studentData=d;
 document.getElementById("loginPage").style.display="none";
 document.getElementById("dataPage").style.display="block";
 
-document.getElementById("info").innerHTML=`
-<p><b>Name:</b> ${d.name}</p>
-<p><b>Reg:</b> ${d.reg}</p>
-<p><b>Course:</b> ${d.course}</p>
-<p><b>Grade:</b> ${d.grade}</p>
-`;
+/* DASHBOARD DATA */
+document.getElementById("dReg").innerText=d.reg;
+document.getElementById("dName").innerText=d.name;
+document.getElementById("dCourse").innerText=d.course;
+document.getElementById("dGrade").innerText=d.grade;
+document.getElementById("dStart").innerText=d.startDate;
+document.getElementById("dEnd").innerText=d.endDate;
 
 }else{
 alert("Invalid Login");
@@ -300,7 +342,7 @@ alert("Invalid Login");
 
 }
 
-/* OPEN CERT */
+/* CERT */
 function openCert(){
 
 document.getElementById("dataPage").style.display="none";
