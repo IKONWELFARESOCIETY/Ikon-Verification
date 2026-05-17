@@ -149,70 +149,145 @@
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const reg = params.get('reg');
+const regFromQR = params.get('reg');
+const app = document.getElementById('app');
 
+// Google Sheet se data fetch
 fetch('https://opensheet.elk.sh/1zdVCJk81D6Kud22DZJJLXalFL0MKhzkvanSV0IYiQBQ/Sheet1')
   .then(r => r.json())
   .then(students => {
-    const student = students.find(s => s["Reg No"] === reg);
-    const app = document.getElementById('app');
 
-    if (!student) {
-      app.innerHTML = '<div class="error">Certificate not found.</div>';
-      return;
+    // CASE 1: Agar QR se aaya (?reg=...)
+    if (regFromQR) {
+      const student = students.find(s => s["Reg No"] === regFromQR);
+
+      if (!student) {
+        app.innerHTML = '<div class="error">Certificate not found.</div>';
+        return;
+      }
+
+      showStudent(student);
     }
 
-    app.innerHTML = `
-      <div class="header">
-  <img src="ikon.jpg">
-  <div class="title">IKON INSTITUTE</div>
-  <div class="subtitle">A Symbol of Success</div>
-  <div class="address">
-  Infront of ANUGRAH COLLEGE, GAYA JI, BIHAR
-</div>
-  <div class="contact">
-    Contact No: 9304669913
-  </div>
-</div>
-<div class="gallery-title">IKON Institute Activities</div>
+    // CASE 2: Direct website open hui → login page dikhao
+    else {
+      app.innerHTML = `
+        <div class="header">
+          <img src="ikon.jpg">
+          <div class="title">IKON INSTITUTE</div>
+          <div class="subtitle">Student Login</div>
+        </div>
 
-<div class="slider">
-  <img src="./img1.jpeg" class="slide active">
-  <img src="./img2.jpeg" class="slide">
-  <img src="./img3.jpeg" class="slide">
-  <img src="./img4.jpeg" class="slide">
-</div>
+        <div style="padding:30px; text-align:center;">
+          <h2>Certificate Login</h2>
 
-      <div class="verified">✓ CERTIFICATE VERIFIED</div>
+          <input id="loginReg"
+                 placeholder="Enter Registration Number"
+                 style="padding:10px; width:250px;"><br><br>
 
-      <div class="details">
-        <div class="item"><div class="label">Student Name</div><div class="value">${student["Name"]}</div></div>
-        <div class="item"><div class="label">Registration Number</div><div class="value">${student["Reg No"]}</div></div>
-        <div class="item"><div class="label">Course</div><div class="value">${student["Course"]}</div></div>
-        <div class="item"><div class="label">Grade</div><div class="value">${student["Grade"]}</div></div>
-        <div class="item"><div class="label">Course Start Date</div><div class="value">${student["Start Date"]}</div></div>
-        <div class="item"><div class="label">Course End Date</div><div class="value">${student["End Date"]}</div></div>
-      </div>
+          <input id="loginDOB"
+                 type="password"
+                 placeholder="Enter DOB (DDMMYYYY)"
+                 style="padding:10px; width:250px;"><br><br>
 
-      <div class="pdf">
-        <h3>Unlock Certificate PDF</h3>
-        <p>Enter DOB (DDMMYYYY)</p>
+          <button onclick="loginStudent()"
+                  style="padding:10px 20px; cursor:pointer;">
+            Login
+          </button>
 
-        <input type="password" id="dobInput" placeholder="e.g. 12052001"
-               style="padding:10px; width:200px;">
+          <p id="loginMsg" style="color:red;"></p>
+        </div>
+      `;
 
-        <button onclick="checkDOB('${student["DOB"]}','${student["pdf"] || ""}')"
-                style="padding:10px 15px; cursor:pointer;">
-          Unlock
-        </button>
-
-        <p id="msg" style="color:red;"></p>
-
-        <div id="pdfBox" style="display:none; margin-top:20px;"></div>
-      </div>
-    `;
+      // global me save
+      window.allStudents = students;
+    }
   });
 
+
+// LOGIN FUNCTION
+function loginStudent() {
+  const reg = document.getElementById("loginReg").value.trim();
+  const dob = document.getElementById("loginDOB").value.trim();
+
+  const student = window.allStudents.find(
+    s => s["Reg No"] === reg && s["DOB"] === dob
+  );
+
+  if (student) {
+    showStudent(student);
+  } else {
+    document.getElementById("loginMsg").innerText =
+      "Invalid Reg No or DOB";
+  }
+}
+
+
+// STUDENT DETAILS SHOW
+function showStudent(student) {
+  app.innerHTML = `
+    <div class="header">
+      <img src="ikon.jpg">
+      <div class="title">IKON INSTITUTE</div>
+      <div class="subtitle">A Symbol of Success</div>
+    </div>
+
+    <div class="verified">✓ CERTIFICATE VERIFIED</div>
+
+    <div class="details">
+      <div class="item">
+        <div class="label">Student Name</div>
+        <div class="value">${student["Name"]}</div>
+      </div>
+
+      <div class="item">
+        <div class="label">Registration Number</div>
+        <div class="value">${student["Reg No"]}</div>
+      </div>
+
+      <div class="item">
+        <div class="label">Course</div>
+        <div class="value">${student["Course"]}</div>
+      </div>
+
+      <div class="item">
+        <div class="label">Grade</div>
+        <div class="value">${student["Grade"]}</div>
+      </div>
+
+      <div class="item">
+        <div class="label">Course Start Date</div>
+        <div class="value">${student["Start Date"]}</div>
+      </div>
+
+      <div class="item">
+        <div class="label">Course End Date</div>
+        <div class="value">${student["End Date"]}</div>
+      </div>
+    </div>
+
+    <div class="pdf">
+      <h3>Unlock Certificate PDF</h3>
+      <p>Enter DOB (DDMMYYYY)</p>
+
+      <input type="password"
+             id="dobInput"
+             placeholder="e.g. 12052001"
+             style="padding:10px; width:200px;">
+
+      <button onclick="checkDOB('${student["DOB"]}','${student["pdf"] || ""}')"
+              style="padding:10px 15px;">
+        Unlock
+      </button>
+
+      <p id="msg" style="color:red;"></p>
+      <div id="pdfBox" style="display:none;"></div>
+    </div>
+  `;
+}
+
+
+// PDF unlock
 function checkDOB(correctDOB, pdfFile) {
   const entered = document.getElementById("dobInput").value.trim();
   const msg = document.getElementById("msg");
@@ -226,7 +301,7 @@ function checkDOB(correctDOB, pdfFile) {
       pdfBox.innerHTML = `<iframe src="${pdfFile}"></iframe>`;
     } else {
       pdfBox.style.display = "block";
-      pdfBox.innerHTML = "<p>PDF not uploaded yet.</p>";
+      pdfBox.innerHTML = "PDF not uploaded yet.";
     }
 
   } else {
@@ -234,20 +309,6 @@ function checkDOB(correctDOB, pdfFile) {
     pdfBox.style.display = "none";
   }
 }
-  setInterval(() => {
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
-
-  slides.forEach((slide, i) => {
-    if (slide.classList.contains('active')) {
-      slide.classList.remove('active');
-      current = i;
-    }
-  });
-
-  let next = (current + 1) % slides.length;
-  slides[next].classList.add('active');
-}, 3000);
 </script>
 </body>
 </html>
