@@ -22,14 +22,15 @@ inset:0;
 overflow:hidden;
 }
 
+/* FIXED IMAGE FIT (NO CUT ON MOBILE/LAPTOP) */
 .slide{
 position:absolute;
 width:100%;
 height:100%;
-object-fit:cover;
+object-fit:contain;   /* 🔥 FIX: was cover, now proper fit */
+background:#000;
 opacity:0;
 transition:1s;
-filter:brightness(1.1);
 }
 
 .slide.active{opacity:1}
@@ -198,7 +199,6 @@ margin:15px auto;
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* GRID */
 .certGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -214,7 +214,6 @@ border-radius:8px;
 border:1px solid #e3edff;
 }
 
-/* VERIFY */
 .verify{
 margin-top:20px;
 color:#1a7f37;
@@ -222,7 +221,7 @@ font-weight:bold;
 font-size:16px;
 }
 
-/* LOCK BOX */
+/* LOCK */
 #lockBox input{
 padding:10px;
 width:250px;
@@ -245,7 +244,7 @@ cursor:pointer;
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
 <div id="loginPage">
 
 <img src="img2.jpg" class="slide active">
@@ -272,7 +271,7 @@ cursor:pointer;
 
 </div>
 
-<!-- ================= DASHBOARD ================= -->
+<!-- DASHBOARD -->
 <div id="dataPage">
 
 <div class="dashboardCard">
@@ -299,7 +298,7 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 
 </div>
 
-<!-- ================= CERTIFICATE ================= -->
+<!-- CERTIFICATE -->
 <div id="certPage">
 
 <div class="cert">
@@ -373,8 +372,8 @@ document.getElementById("dReg").innerText=d.reg;
 document.getElementById("dName").innerText=d.name;
 document.getElementById("dCourse").innerText=d.course;
 document.getElementById("dGrade").innerText=d.grade;
-document.getElementById("dStart").innerText=d.startDate;
-document.getElementById("dEnd").innerText=d.endDate;
+document.getElementById("dStart").innerText=d.StartDate;
+document.getElementById("dEnd").innerText=d.Enddate;
 
 }else{
 alert("Invalid Login");
@@ -388,7 +387,7 @@ document.getElementById("dataPage").style.display="none";
 document.getElementById("certPage").style.display="flex";
 }
 
-/* UNLOCK CERT */
+/* UNLOCK */
 function unlockCert(){
 
 let val=document.getElementById("certDob").value;
@@ -409,8 +408,8 @@ document.getElementById("cName").innerText=studentData.name;
 document.getElementById("cReg").innerText=studentData.reg;
 document.getElementById("cCourse").innerText=studentData.course;
 document.getElementById("cGrade").innerText=studentData.grade;
-document.getElementById("cStart").innerText=studentData.startDate;
-document.getElementById("cEnd").innerText=studentData.endDate;
+document.getElementById("cStart").innerText=studentData.StartDate;
+document.getElementById("cEnd").innerText=studentData.Enddate;
 
 document.getElementById("cPhoto").src=studentData.reg+".jpg";
 
