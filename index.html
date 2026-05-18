@@ -585,10 +585,9 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <div><b>End Date:</b> <span id="cEndDate"></span></div>
 </div>
 
-<div class="ISSUEDATE">
-<b>Issue Date:</b> <span id="cIssue Date"></span>
+<div class="verify">
+<b>Issue Date:</b> <span id="cISSUEDATE"></span>
 </div>
-
 </div>
 
 </div>
@@ -622,6 +621,7 @@ let res=await fetch(API+"?reg="+reg+"&dob="+dob);
 let d=await res.json();
 
 if(d.status==="FOUND"){
+
 
 studentData=d;
 
@@ -686,20 +686,11 @@ document.getElementById("cEndDate").innerText =
 (
 studentData["ISSUE DATE"] ||
 studentData["Issue Date"] ||
-studentData["Issue Date"] ||
 studentData.issueDate ||
 studentData.IssueDate ||
 "-"
 );
 
-document.getElementById("cISSUEDATE").innerText =
-"Verified On: " + (
-studentData.verifyDate ||
-studentData.VerifyDate ||
-studentData.verificationDate ||
-studentData.VerificationDate ||
-"-"
-);
 
 document.getElementById("cPhoto").src =
 ((studentData.reg || "").trim()) + ".jpeg?v=" + Date.now();
