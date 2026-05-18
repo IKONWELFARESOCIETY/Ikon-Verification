@@ -669,13 +669,12 @@ document.getElementById("cEndDate").innerText =
   document.getElementById("cIssueDate").innerText =
 (
 studentData["ISSUE DATE"] ||
-studentData.IssueDate ||
+studentData["Issue Date"] ||
+studentData["issue date"] ||
 studentData.issueDate ||
+studentData.IssueDate ||
 "-"
 );
-
-document.getElementById("cPhoto").src =
-((studentData.reg || "").trim()) + ".jpeg?v=" + Date.now();
 
 document.getElementById("cVerify").innerText =
 "Verified On: " + (
@@ -685,6 +684,9 @@ studentData.verificationDate ||
 studentData.VerificationDate ||
 "-"
 );
+
+document.getElementById("cPhoto").src =
+((studentData.reg || "").trim()) + ".jpeg?v=" + Date.now();
 
 /* EFFECTS */
 
