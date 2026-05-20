@@ -99,20 +99,65 @@ body{
     to{opacity:1; transform:translateY(0);}
 }
 
-.logo{
+.logoWrap{
     text-align:center;
-    color:#fff;
-    font-size:30px;
-    font-weight:700;
-    text-shadow:0 0 10px rgba(255,255,255,0.4);
+    margin-bottom:20px;
+    animation:fadeDown 1s ease;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    background:linear-gradient(90deg,#ffffff,#dbeafe,#ffffff);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 3s linear infinite;
+    text-shadow:0 0 25px rgba(255,255,255,0.3);
 }
 
 .tagline{
-    text-align:center;
-    color:#dbeafe;
-    margin-top:4px;
-    margin-bottom:10px;
-    font-size:14px;
+    margin-top:8px;
+    font-size:22px;
+    color:#e0f2fe;
+    letter-spacing:1px;
+    font-weight:500;
+    text-shadow:0 0 10px rgba(255,255,255,0.25);
+    animation:pulseText 2s infinite;
+}
+
+@keyframes shine{
+    0%{
+        background-position:0% center;
+    }
+    100%{
+        background-position:200% center;
+    }
+}
+
+@keyframes pulseText{
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+    50%{
+        opacity:0.8;
+        transform:scale(1.03);
+    }
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 }
 
 .info{
@@ -232,8 +277,10 @@ button:active{
 <div class="container">
     <img src="ikon.jpg" class="topLogo">
 
-    <div class="logo">IKON Institute</div>
-    <div class="tagline">Professional Course Enquiry Form</div>
+  <div class="logoWrap">
+    <div class="logo">IKON INSTITUTE</div>
+    <div class="tagline"> A Symbol Of Success </div>
+</div>
 
     <div class="info">
         📍 Infront of Anughrah College Gate No. 1, Gaya Ji, Bihar<br>
