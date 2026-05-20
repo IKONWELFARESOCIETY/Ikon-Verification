@@ -265,13 +265,36 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
     e.preventDefault();
 
     let msg = document.getElementById("message");
-    msg.innerHTML = "Enquiry Submitted Successfully ✅";
 
-    this.reset();
+    let data = {
+        name: document.getElementById("name").value,
+        contact: document.getElementById("contact").value,
+        course: document.getElementById("course").value,
+        address: document.getElementById("address").value
+    };
 
-    setTimeout(()=>{
-        msg.innerHTML = "";
-    }, 4000);
+    msg.style.color = "#ffffff";
+    msg.innerHTML = "Submitting... ⏳";
+
+    fetch("https://script.google.com/macros/s/AKfycbxXmp2o31ZtGA9aXSWtBca6dEYTOTAYMy10V1ouOnOXBdeqPZT_XtEsywvJqoW7CoflQA/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(result => {
+        msg.style.color = "#bbf7d0";
+        msg.innerHTML = "Enquiry Submitted Successfully ✅";
+        document.getElementById("enquiryForm").reset();
+
+        setTimeout(() => {
+            msg.innerHTML = "";
+        }, 4000);
+    })
+    .catch(err => {
+        msg.style.color = "#ffb4b4";
+        msg.innerHTML = "Submission Failed ❌";
+        console.log(err);
+    });
 });
 </script>
 
