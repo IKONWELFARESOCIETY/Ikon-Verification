@@ -32,50 +32,17 @@ body{
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
 }
-.topLogo{
-    width:90px;
-    height:90px;
-    object-fit:contain;
-    display:block;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:white;
-    padding:6px;
-    box-shadow:0 0 20px rgba(255,255,255,0.5);
-    animation:logoGlow 2s infinite alternate;
-}
 
-@keyframes logoGlow{
-    from{
-        transform:scale(1);
-        box-shadow:0 0 10px rgba(255,255,255,0.4);
-    }
-    to{
-        transform:scale(1.05);
-        box-shadow:0 0 25px rgba(255,255,255,0.8);
-    }
-}
-/* Floating circles */
 .circle{
     position:absolute;
     border-radius:50%;
     background:rgba(255,255,255,0.08);
     animation:float 10s infinite linear;
 }
-.circle:nth-child(1){
-    width:120px;height:120px;
-    top:10%;left:10%;
-}
-.circle:nth-child(2){
-    width:180px;height:180px;
-    bottom:15%;right:10%;
-    animation-duration:14s;
-}
-.circle:nth-child(3){
-    width:80px;height:80px;
-    top:70%;left:20%;
-    animation-duration:8s;
-}
+.circle:nth-child(1){width:120px;height:120px;top:10%;left:10%;}
+.circle:nth-child(2){width:180px;height:180px;bottom:15%;right:10%;animation-duration:14s;}
+.circle:nth-child(3){width:80px;height:80px;top:70%;left:20%;animation-duration:8s;}
+
 @keyframes float{
     0%{transform:translateY(0) rotate(0);}
     50%{transform:translateY(-40px) rotate(180deg);}
@@ -99,65 +66,62 @@ body{
     to{opacity:1; transform:translateY(0);}
 }
 
+.topLogo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 15px;
+    border-radius:50%;
+    background:white;
+    padding:6px;
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+    animation:logoGlow 2s infinite alternate;
+}
+
+@keyframes logoGlow{
+    from{
+        transform:scale(1);
+        box-shadow:0 0 10px rgba(255,255,255,0.4);
+    }
+    to{
+        transform:scale(1.05);
+        box-shadow:0 0 25px rgba(255,255,255,0.8);
+    }
+}
+
 .logoWrap{
     text-align:center;
     margin-bottom:20px;
-    animation:fadeDown 1s ease;
 }
 
 .logo{
     font-size:34px;
     font-weight:800;
     letter-spacing:2px;
-    text-transform:uppercase;
     background:linear-gradient(90deg,#ffffff,#dbeafe,#ffffff);
     background-size:200% auto;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:shine 3s linear infinite;
-    text-shadow:0 0 25px rgba(255,255,255,0.3);
 }
 
 .tagline{
     margin-top:8px;
-    font-size:22px;
+    font-size:15px;
     color:#e0f2fe;
     letter-spacing:1px;
-    font-weight:500;
-    text-shadow:0 0 10px rgba(255,255,255,0.25);
     animation:pulseText 2s infinite;
 }
 
 @keyframes shine{
-    0%{
-        background-position:0% center;
-    }
-    100%{
-        background-position:200% center;
-    }
+    from{background-position:0% center;}
+    to{background-position:200% center;}
 }
 
 @keyframes pulseText{
-    0%,100%{
-        opacity:1;
-        transform:scale(1);
-    }
-    50%{
-        opacity:0.8;
-        transform:scale(1.03);
-    }
-}
-
-@keyframes fadeDown{
-    from{
-        opacity:0;
-        transform:translateY(-20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+    0%,100%{opacity:1;}
+    50%{opacity:0.7;}
 }
 
 .info{
@@ -180,7 +144,6 @@ label{
     color:#fff;
     margin-bottom:6px;
     font-size:14px;
-    font-weight:500;
 }
 
 input, textarea, select{
@@ -192,20 +155,11 @@ input, textarea, select{
     background:rgba(255,255,255,0.18);
     color:#fff;
     font-size:15px;
-    transition:0.3s;
 }
 
 input::placeholder,
 textarea::placeholder{
     color:#d1d5db;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    background:rgba(255,255,255,0.25);
-    box-shadow:0 0 12px rgba(255,255,255,0.25);
-    transform:scale(1.01);
 }
 
 select option{
@@ -222,17 +176,6 @@ button{
     font-size:17px;
     font-weight:600;
     cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 8px 20px rgba(0,0,0,0.25);
-}
-
-button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 25px rgba(0,0,0,0.35);
-}
-
-button:active{
-    transform:scale(0.98);
 }
 
 #message{
@@ -261,11 +204,6 @@ button:active{
     from{transform:translateX(100%);}
     to{transform:translateX(-100%);}
 }
-
-@media(max-width:600px){
-    .container{padding:22px;}
-    .logo{font-size:24px;}
-}
 </style>
 </head>
 <body>
@@ -275,58 +213,59 @@ button:active{
 <div class="circle"></div>
 
 <div class="container">
-    <img src="ikon.jpg" class="topLogo">
 
-  <div class="logoWrap">
+<img src="ikon.jpg" class="topLogo">
+
+<div class="logoWrap">
     <div class="logo">IKON INSTITUTE</div>
-    <div class="tagline"> A Symbol Of Success </div>
+    <div class="tagline">✨ A Symbol Of Success ✨</div>
 </div>
 
-    <div class="info">
-        📍 Infront of Anughrah College Gate No. 1, Gaya Ji, Bihar<br>
-        📞 9304669913, 7368810242
-    </div>
+<div class="info">
+📍 Infront of Anughrah College Gate No. 1, Gaya Ji, Bihar<br>
+📞 9304669913, 7368810242
+</div>
 
-    <form id="enquiryForm">
+<form id="enquiryForm">
 
-        <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
-        </div>
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your name" required>
+</div>
 
-        <div class="input-group">
-            <label>Contact Number</label>
-            <input type="tel" id="contact" placeholder="Enter mobile number" required>
-        </div>
+<div class="input-group">
+<label>Contact Number</label>
+<input type="tel" id="contact" placeholder="Enter mobile number" required>
+</div>
 
-        <div class="input-group">
-            <label>Select Course</label>
-            <select id="course" required>
-                <option value="">Choose Course</option>
-                <option>DCA</option>
-                <option>ADCA</option>
-                <option>PGDAM</option>
-                <option>MS Office</option>
-                <option>Advance Excel</option>
-                <option>Power BI</option>
-            </select>
-        </div>
+<div class="input-group">
+<label>Select Course</label>
+<select id="course" required>
+<option value="">Choose Course</option>
+<option>DCA</option>
+<option>ADCA</option>
+<option>PGDAM</option>
+<option>MS Office</option>
+<option>Advance Excel</option>
+<option>Power BI</option>
+</select>
+</div>
 
-        <div class="input-group">
-            <label>Address</label>
-            <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
-        </div>
+<div class="input-group">
+<label>Address</label>
+<textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+</div>
 
-        <button type="submit">Submit Enquiry</button>
+<button type="submit">Submit Enquiry</button>
 
-        <div id="message"></div>
-    </form>
+<div id="message"></div>
+</form>
 
-    <div class="course-strip">
-        <div class="course-track">
-            ✨ Courses Offered: DCA • ADCA • PGDAM • MS Office • Advance Excel • Power BI • Skill Development • Career Growth ✨
-        </div>
-    </div>
+<div class="course-strip">
+<div class="course-track">
+✨ Courses Offered: DCA • ADCA • PGDAM • MS Office • Advance Excel • Power BI • Skill Development • Career Growth ✨
+</div>
+</div>
 
 </div>
 
@@ -337,24 +276,30 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
     let msg = document.getElementById("message");
 
     let data = {
-        name: document.getElementById("name").value,
-        contact: document.getElementById("contact").value,
+        name: document.getElementById("name").value.trim(),
+        contact: document.getElementById("contact").value.trim(),
         course: document.getElementById("course").value,
-        address: document.getElementById("address").value
+        address: document.getElementById("address").value.trim()
     };
+
+    if(!data.name || !data.contact || !data.course){
+        msg.style.color = "#ffb4b4";
+        msg.innerHTML = "Please fill all required fields ❌";
+        return;
+    }
 
     msg.style.color = "#ffffff";
     msg.innerHTML = "Submitting... ⏳";
 
-   fetch("https://script.google.com/macros/s/AKfycbxXmp2o31ZtGA9aXSWtBca6dEYTOTAYMy10V1ouOnOXBdeqPZT_XtEsywvJqoW7CoflQA/exec", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-})
-    .then(res => res.text())
-    .then(result => {
+    fetch("https://script.google.com/macros/s/AKfycbxXmp2o31ZtGA9aXSWtBca6dEYTOTAYMy10V1ouOnOXBdeqPZT_XtEsywvJqoW7CoflQA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
         msg.style.color = "#bbf7d0";
         msg.innerHTML = "Enquiry Submitted Successfully ✅";
         document.getElementById("enquiryForm").reset();
@@ -363,7 +308,7 @@ document.getElementById("enquiryForm").addEventListener("submit", function(e){
             msg.innerHTML = "";
         }, 4000);
     })
-    .catch(err => {
+    .catch((err) => {
         msg.style.color = "#ffb4b4";
         msg.innerHTML = "Submission Failed ❌";
         console.log(err);
