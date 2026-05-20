@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Enquiry | IKON Institute</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#0f172a,#1e3a8a,#2563eb,#06b6d4);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    overflow:hidden;
+    padding:20px;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Floating circles */
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    animation:float 10s infinite linear;
+}
+.circle:nth-child(1){
+    width:120px;height:120px;
+    top:10%;left:10%;
+}
+.circle:nth-child(2){
+    width:180px;height:180px;
+    bottom:15%;right:10%;
+    animation-duration:14s;
+}
+.circle:nth-child(3){
+    width:80px;height:80px;
+    top:70%;left:20%;
+    animation-duration:8s;
+}
+@keyframes float{
+    0%{transform:translateY(0) rotate(0);}
+    50%{transform:translateY(-40px) rotate(180deg);}
+    100%{transform:translateY(0) rotate(360deg);}
+}
+
+.container{
+    width:100%;
+    max-width:560px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.logo{
+    text-align:center;
+    color:#fff;
+    font-size:30px;
+    font-weight:700;
+    text-shadow:0 0 10px rgba(255,255,255,0.4);
+}
+
+.tagline{
+    text-align:center;
+    color:#dbeafe;
+    margin-top:4px;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.info{
+    text-align:center;
+    color:#ffffff;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:22px;
+    padding:12px;
+    background:rgba(255,255,255,0.08);
+    border-radius:14px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    color:#fff;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:500;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:14px 16px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    background:rgba(255,255,255,0.18);
+    color:#fff;
+    font-size:15px;
+    transition:0.3s;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#d1d5db;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    background:rgba(255,255,255,0.25);
+    box-shadow:0 0 12px rgba(255,255,255,0.25);
+    transform:scale(1.01);
+}
+
+select option{
+    color:#000;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(45deg,#22c55e,#16a34a);
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.35);
+}
+
+button:active{
+    transform:scale(0.98);
+}
+
+#message{
+    text-align:center;
+    color:#bbf7d0;
+    margin-top:18px;
+    font-weight:500;
+}
+
+.course-strip{
+    margin-top:25px;
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid rgba(255,255,255,0.15);
+    padding-top:15px;
+}
+
+.course-track{
+    display:inline-block;
+    animation:scroll 18s linear infinite;
+    color:#fff;
+    font-size:14px;
+}
+
+@keyframes scroll{
+    from{transform:translateX(100%);}
+    to{transform:translateX(-100%);}
+}
+
+@media(max-width:600px){
+    .container{padding:22px;}
+    .logo{font-size:24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="container">
+
+    <div class="logo">IKON Institute</div>
+    <div class="tagline">Professional Course Enquiry Form</div>
+
+    <div class="info">
+        📍 Infront of Anughrah College Gate No. 1, Gaya Ji, Bihar<br>
+        📞 9304669913, 7368810242
+    </div>
+
+    <form id="enquiryForm">
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="input-group">
+            <label>Contact Number</label>
+            <input type="tel" id="contact" placeholder="Enter mobile number" required>
+        </div>
+
+        <div class="input-group">
+            <label>Select Course</label>
+            <select id="course" required>
+                <option value="">Choose Course</option>
+                <option>DCA</option>
+                <option>ADCA</option>
+                <option>PGDAM</option>
+                <option>MS Office</option>
+                <option>Advance Excel</option>
+                <option>Power BI</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Address</label>
+            <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+        </div>
+
+        <button type="submit">Submit Enquiry</button>
+
+        <div id="message"></div>
+    </form>
+
+    <div class="course-strip">
+        <div class="course-track">
+            ✨ Courses Offered: DCA • ADCA • PGDAM • MS Office • Advance Excel • Power BI • Skill Development • Career Growth ✨
+        </div>
+    </div>
+
+</div>
+
+<script>
+document.getElementById("enquiryForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let msg = document.getElementById("message");
+    msg.innerHTML = "Enquiry Submitted Successfully ✅";
+
+    this.reset();
+
+    setTimeout(()=>{
+        msg.innerHTML = "";
+    }, 4000);
+});
+</script>
+
+</body>
+</html>
