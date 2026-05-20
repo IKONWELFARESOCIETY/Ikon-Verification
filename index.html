@@ -6,6 +6,74 @@
 <title>IKON Verification System</title>
 
 <style>
+  #homeChoice{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.choice-box{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    animation:fadeIn 1s ease;
+}
+
+.choice-box h1{
+    margin-bottom:10px;
+}
+
+.choice-box p{
+    margin-bottom:25px;
+    color:#dbeafe;
+}
+
+.choice-btn{
+    display:block;
+    width:280px;
+    padding:15px;
+    margin:15px auto;
+    text-decoration:none;
+    color:white;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.verify-btn{
+    background:#2563eb;
+}
+
+.enquiry-btn{
+    background:#16a34a;
+}
+
+.choice-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
 /* ================= GLOBAL ================= */
 body{
@@ -569,6 +637,21 @@ opacity:0;
 </head>
 
 <body>
+  <div id="homeChoice">
+    <div class="choice-box">
+        <h1>IKON Institute</h1>
+        <p>Select an option</p>
+
+        <a href="#verificationSection" class="choice-btn verify-btn"
+           onclick="document.getElementById('homeChoice').style.display='none'">
+           Certificate Verification
+        </a>
+
+        <a href="enquiry.html" class="choice-btn enquiry-btn">
+           Course Enquiry
+        </a>
+    </div>
+</div>
 
 <!-- LOGIN -->
 <div id="loginPage">
@@ -594,19 +677,6 @@ opacity:0;
 <input id="dob" placeholder="DOB">
 <button onclick="login()">Login</button>
 </div>
-<a href="enquiry.html" style="
-display:inline-block;
-padding:12px 25px;
-background:#16a34a;
-color:white;
-text-decoration:none;
-border-radius:10px;
-font-weight:600;
-margin:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-">
-Course Enquiry
-</a>
 </div>
   <br>
 <!-- DASHBOARD -->
@@ -679,6 +749,11 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <canvas id="confetti"></canvas>
 
 <script>
+  <script>
+function openVerification(){
+   document.getElementById("homeChoice").style.display="none";
+}
+</script>
 
 const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
