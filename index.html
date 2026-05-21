@@ -275,6 +275,11 @@ certFloat 4s ease-in-out infinite,
 certTilt 6s ease-in-out infinite;
 transform-style:preserve-3d;
 }
+
+@keyframes certFloat{
+0%{
+transform:translateY(0px);
+}
 50%{
 transform:translateY(-8px);
 }
@@ -657,14 +662,13 @@ opacity:0;
 <body>
   <div id="homeChoice">
     <div class="choice-box">
-        <h1>IKON INSTITUTE</h1>
+        <h1>IKON INSTITUTE</h1>        
         <p>Select an option</p>
-
-        <a href="#verificationSection" class="choice-btn verify-btn"
-           onclick="document.getElementById('homeChoice').style.display='none'">
-           Certificate Verification
-        </a>
-
+<a href="javascript:void(0)" 
+class="choice-btn verify-btn"
+onclick="document.getElementById('homeChoice').style.display='none'">
+Certificate Verification
+</a>
         <a href="enquiry.html" class="choice-btn enquiry-btn">
            Course Enquiry
         </a>
@@ -767,11 +771,12 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <canvas id="confetti"></canvas>
 
 <script>
-  <script>
+
 function openVerification(){
    document.getElementById("homeChoice").style.display="none";
 }
-</script>
+
+const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
 const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
