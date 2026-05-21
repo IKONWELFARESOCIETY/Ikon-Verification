@@ -287,6 +287,154 @@ transform:translateY(-8px);
 transform:translateY(0px);
 }
 }
+    /* ===== ULTRA PREMIUM EFFECTS ===== */
+
+/* Neon breathing aura */
+.cert{
+animation:
+certEntry 1s cubic-bezier(.17,.89,.32,1.49),
+premiumGlow 2.5s ease-in-out infinite alternate,
+certFloat 4s ease-in-out infinite,
+certTilt 6s ease-in-out infinite,
+neonPulse 3s infinite alternate;
+}
+
+/* Animated gradient shine */
+.cert::before{
+background:
+linear-gradient(
+120deg,
+transparent 0%,
+rgba(255,255,255,.15) 40%,
+rgba(255,255,255,.6) 50%,
+rgba(255,255,255,.15) 60%,
+transparent 100%
+);
+background-size:250% 250%;
+animation:
+shineMove 5s linear infinite,
+borderGlow 3s infinite alternate;
+mix-blend-mode:screen;
+}
+
+/* Floating hologram circles */
+.holo{
+position:absolute;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.15);
+pointer-events:none;
+animation:holoMove linear infinite;
+backdrop-filter:blur(2px);
+}
+
+/* Rotating glow beam */
+.beam{
+position:absolute;
+width:200%;
+height:200%;
+background:
+conic-gradient(
+from 0deg,
+transparent,
+rgba(0,198,255,.12),
+transparent,
+rgba(255,255,255,.08),
+transparent
+);
+animation:beamRotate 12s linear infinite;
+top:-50%;
+left:-50%;
+pointer-events:none;
+}
+
+/* Particle wave */
+.waveParticle{
+position:absolute;
+width:4px;
+height:4px;
+border-radius:50%;
+background:white;
+opacity:.5;
+animation:waveFloat linear infinite;
+}
+
+/* KEYFRAMES */
+
+@keyframes neonPulse{
+from{
+filter:
+drop-shadow(0 0 10px rgba(0,198,255,.3))
+drop-shadow(0 0 20px rgba(24,71,209,.2));
+}
+to{
+filter:
+drop-shadow(0 0 25px rgba(0,198,255,.7))
+drop-shadow(0 0 50px rgba(24,71,209,.5));
+}
+}
+
+@keyframes shineMove{
+0%{
+background-position:-200% 0;
+}
+100%{
+background-position:200% 0;
+}
+}
+
+@keyframes holoMove{
+0%{
+transform:
+translateY(0)
+translateX(0)
+scale(.7)
+rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:.35;
+}
+80%{
+opacity:.2;
+}
+100%{
+transform:
+translateY(-120vh)
+translateX(80px)
+scale(1.4)
+rotate(360deg);
+opacity:0;
+}
+}
+
+@keyframes beamRotate{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+@keyframes waveFloat{
+0%{
+transform:
+translateY(0)
+scale(0);
+opacity:0;
+}
+20%{
+opacity:1;
+transform:scale(1);
+}
+100%{
+transform:
+translateY(-120vh)
+translateX(50px)
+scale(0);
+opacity:0;
+}
+}
 
 /* Golden Border */
 
@@ -842,6 +990,9 @@ if(val !== dob){
 document.getElementById("msg").style.color="red";
 document.getElementById("msg").innerText="Wrong DOB ❌";
 return;
+createHolograms();
+createBeam();
+createWaveParticles();
 }
 
 document.getElementById("msg").style.color="green";
@@ -1054,6 +1205,68 @@ p.className="particle";
 p.style.left=Math.random()*100+"vw";
 p.style.animationDuration=
 (Math.random()*8+5)+"s";
+
+document.body.appendChild(p);
+
+}
+
+}
+    /* ===== HOLOGRAM CIRCLES ===== */
+
+function createHolograms(){
+
+for(let i=0;i<12;i++){
+
+let h=document.createElement("div");
+
+h.className="holo";
+
+let size=Math.random()*200+80;
+
+h.style.width=size+"px";
+h.style.height=size+"px";
+
+h.style.left=Math.random()*100+"vw";
+h.style.top=Math.random()*100+"vh";
+
+h.style.animationDuration=
+(Math.random()*15+10)+"s";
+
+document.body.appendChild(h);
+
+}
+
+}
+
+/* ===== ROTATING LIGHT BEAM ===== */
+
+function createBeam(){
+
+let beam=document.createElement("div");
+
+beam.className="beam";
+
+document.querySelector(".cert").appendChild(beam);
+
+}
+
+/* ===== FLOATING PARTICLES ===== */
+
+function createWaveParticles(){
+
+for(let i=0;i<80;i++){
+
+let p=document.createElement("div");
+
+p.className="waveParticle";
+
+p.style.left=Math.random()*100+"vw";
+
+p.style.animationDuration=
+(Math.random()*6+4)+"s";
+
+p.style.animationDelay=
+(Math.random()*5)+"s";
 
 document.body.appendChild(p);
 
