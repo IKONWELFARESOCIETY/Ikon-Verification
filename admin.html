@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+/* LOGIN */
+#adminLogin{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.loginBox{
+background:#fff;
+padding:30px;
+border-radius:15px;
+width:320px;
+box-shadow:0 8px 25px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.loginBox h2{
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:8px;
+outline:none;
+}
+
+button{
+padding:12px 18px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:#fff;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+/* DASHBOARD */
+#dashboard{
+display:none;
+padding:20px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+font-size:15px;
+color:#555;
+}
+
+.card p{
+font-size:28px;
+margin-top:10px;
+font-weight:bold;
+}
+
+.section{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
+font-size:14px;
+}
+
+.actions button{
+padding:6px 10px;
+font-size:12px;
+margin-right:5px;
+}
+
+.delete{
+background:red;
+}
+
+@media(max-width:768px){
+table{
+font-size:12px;
+}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="adminLogin">
+<div class="loginBox">
+<h2>Admin Login</h2>
+
+<input id="adminUser" placeholder="Username">
+<input id="adminPass" type="password" placeholder="Password">
+
+<button onclick="adminLogin()">Login</button>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<div class="topbar">
+<h2>Admin Dashboard</h2>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="cards">
+<div class="card">
+<h3>Total Students</h3>
+<p id="totalStudents">0</p>
+</div>
+
+<div class="card">
+<h3>Certificates</h3>
+<p id="totalCerts">0</p>
+</div>
+
+<div class="card">
+<h3>Enquiries</h3>
+<p id="totalEnquiry">0</p>
+</div>
+</div>
+
+<!-- ADD STUDENT -->
+<div class="section">
+<h3>Add Student</h3>
+
+<input id="reg" placeholder="Reg No">
+<input id="name" placeholder="Name">
+<input id="course" placeholder="Course">
+<input id="startDate" type="date">
+<input id="endDate" type="date">
+<input id="grade" placeholder="Grade">
+<input id="issueDate" type="date">
+<input id="dob" type="date">
+
+<button onclick="addStudent()">Add Student</button>
+</div>
+
+<!-- SEARCH -->
+<div class="section">
+<h3>Search Student</h3>
+
+<input id="searchReg" placeholder="Enter Reg No">
+<button onclick="searchStudent()">Search</button>
+
+<div id="searchResult"></div>
+</div>
+
+<!-- TABLE -->
+<div class="section">
+<h3>Recent Students</h3>
+
+<table>
+<thead>
+<tr>
+<th>Reg</th>
+<th>Name</th>
+<th>Course</th>
+<th>Grade</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="studentTable"></tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+const API="YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
+
+/* LOGIN */
+function adminLogin(){
+
+let u=document.getElementById("adminUser").value;
+let p=document.getElementById("adminPass").value;
+
+if(u==="admin" && p==="12345"){
+document.getElementById("adminLogin").style.display="none";
+document.getElementById("dashboard").style.display="block";
+loadStudents();
+}else{
+alert("Wrong Login");
+}
+}
+
+/* LOGOUT */
+function logout(){
+location.reload();
+}
+
+/* ADD STUDENT */
+async function addStudent(){
+
+let data={
+action:"add",
+reg:reg.value,
+name:name.value,
+course:course.value,
+startDate:startDate.value,
+endDate:endDate.value,
+grade:grade.value,
+issueDate:issueDate.value,
+dob:dob.value
+};
+
+let res=await fetch(API,{
+method:"POST",
+body:JSON.stringify(data)
+});
+
+let d=await res.text();
+
+alert(d);
+loadStudents();
+}
+
+/* LOAD STUDENTS */
+async function loadStudents(){
+
+let res=await fetch(API+"?action=list");
+let data=await res.json();
+
+document.getElementById("totalStudents").innerText=data.length;
+document.getElementById("totalCerts").innerText=data.length;
+
+let html="";
+
+data.forEach(s=>{
+
+html+=`
+<tr>
+<td>${s.reg}</td>
+<td>${s.name}</td>
+<td>${s.course}</td>
+<td>${s.grade}</td>
+<td class="actions">
+<button onclick="deleteStudent('${s.reg}')" class="delete">Delete</button>
+</td>
+</tr>
+`;
+
+});
+
+document.getElementById("studentTable").innerHTML=html;
+}
+
+/* SEARCH */
+async function searchStudent(){
+
+let reg=document.getElementById("searchReg").value;
+
+let res=await fetch(API+"?action=search&reg="+reg);
+let d=await res.json();
+
+document.getElementById("searchResult").innerHTML=
+`
+<p><b>Name:</b> ${d.name||"-"}</p>
+<p><b>Course:</b> ${d.course||"-"}</p>
+<p><b>Grade:</b> ${d.grade||"-"}</p>
+`;
+}
+
+/* DELETE */
+async function deleteStudent(reg){
+
+if(!confirm("Delete student?")) return;
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+action:"delete",
+reg:reg
+})
+});
+
+loadStudents();
+}
+</script>
+</body>
+</html>
