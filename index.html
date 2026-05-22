@@ -24,6 +24,50 @@
 
 </head>
 <style>
+    /* Initial hidden state */
+.left-info,
+.right-info{
+opacity:0;
+}
+
+.left-info{
+transform:translateX(-80px);
+}
+
+.right-info{
+transform:translateX(80px);
+}
+
+/* Animation trigger */
+.left-info.show{
+animation:slideLeft .8s ease forwards;
+}
+
+.right-info.show{
+animation:slideRight .8s ease forwards;
+}
+
+@keyframes slideLeft{
+from{
+opacity:0;
+transform:translateX(-80px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+@keyframes slideRight{
+from{
+opacity:0;
+transform:translateX(80px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
   #homeChoice{
     position:fixed;
     top:0;
@@ -803,6 +847,113 @@ transform:translateY(-20vh) scale(0);
 opacity:0;
 }
 }
+    /* ===== CERTIFICATE PREVIEW ANIMATION ===== */
+
+/* Certificate page hidden initially */
+#certPage{
+opacity:0;
+transform:scale(.96);
+transition:all .6s ease;
+}
+
+#certPage.show{
+opacity:1;
+transform:scale(1);
+}
+
+/* Certificate main box */
+.certContainer{
+animation:certPop .8s ease;
+box-shadow:0 10px 35px rgba(0,0,0,.18);
+border-radius:18px;
+overflow:hidden;
+}
+
+/* Student detail items initial */
+.left-info,
+.right-info{
+opacity:0;
+will-change:transform, opacity;
+}
+
+/* Left items */
+.left-info{
+transform:translateX(-40px);
+}
+
+/* Right items */
+.right-info{
+transform:translateX(40px);
+}
+
+/* Trigger animation */
+.left-info.show{
+animation:leftReveal .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.right-info.show{
+animation:rightReveal .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* Keyframes */
+@keyframes certPop{
+0%{
+opacity:0;
+transform:scale(.94);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes leftReveal{
+from{
+opacity:0;
+transform:translateX(-40px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+@keyframes rightReveal{
+from{
+opacity:0;
+transform:translateX(40px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+/* Mobile Friendly */
+@media(max-width:768px){
+
+.certContainer{
+width:95%;
+padding:18px;
+border-radius:14px;
+}
+
+.certGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+}
+
+.left-info,
+.right-info{
+font-size:14px;
+padding:10px 12px;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(8px);
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+}
 
 </style>
 </head>
@@ -900,11 +1051,11 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <h3 id="cName"></h3>
 
 <div class="certGrid">
-<div><b>Reg No:</b> <span id="cReg"></span></div>
-<div><b>Course:</b> <span id="cCourse"></span></div>
-<div><b>Grade:</b> <span id="cGrade"></span></div>
-<div><b>Start Date:</b> <span id="cStartDate"></span></div>
-<div><b>End Date:</b> <span id="cEndDate"></span></div>
+<div class="left-info"><div><b>Reg No:</b> <span id="cReg"></span></div></div>
+<div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
+<div class="left-info"><div><b>Grade:</b> <span id="cGrade"></span></div></div>
+<div class="right-info"><div><b>Start Date:</b> <span id="cStartDate"></span></div></div>
+<div class="left-info"><div><b>End Date:</b> <span id="cEndDate"></span></div></div>
 </div>
 
 <div class="verify">
@@ -975,8 +1126,24 @@ alert("Invalid Login");
 function openCert(){
 document.getElementById("dataPage").style.display="none";
 document.getElementById("certPage").style.display="flex";
-}
 
+setTimeout(()=>{
+document.getElementById("certPage").classList.add("show");
+
+document.querySelectorAll(".left-info").forEach((el,index)=>{
+setTimeout(()=>{
+el.classList.add("show");
+},300 + index*180);
+});
+
+document.querySelectorAll(".right-info").forEach((el,index)=>{
+setTimeout(()=>{
+el.classList.add("show");
+},400 + index*180);
+});
+
+},100);
+}
 /* UNLOCK */
 function unlockCert(){
 
