@@ -262,9 +262,11 @@ grade:document.getElementById("grade").value,
 issueDate:document.getElementById("issueDate").value,
 dob:document.getElementById("dob").value
 };
-
 let res=await fetch(API,{
 method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
 body:JSON.stringify(data)
 });
 
