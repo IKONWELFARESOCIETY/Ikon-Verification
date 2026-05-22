@@ -224,7 +224,7 @@ font-size:12px;
 </div>
 
 <script>
-const API="YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
+const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wunZjyl7JVKRET0z3QEZDFJyoeDgZSksKWIBCU0u/exec";
 
 /* LOGIN */
 function adminLogin(){
@@ -235,6 +235,7 @@ let p=document.getElementById("adminPass").value;
 if(u==="admin" && p==="12345"){
 document.getElementById("adminLogin").style.display="none";
 document.getElementById("dashboard").style.display="block";
+  localStorage.setItem("adminLogged","yes");
 loadStudents();
 }else{
 alert("Wrong Login");
@@ -243,6 +244,7 @@ alert("Wrong Login");
 
 /* LOGOUT */
 function logout(){
+localStorage.removeItem("adminLogged");
 location.reload();
 }
 
@@ -251,14 +253,14 @@ async function addStudent(){
 
 let data={
 action:"add",
-reg:reg.value,
-name:name.value,
-course:course.value,
-startDate:startDate.value,
-endDate:endDate.value,
-grade:grade.value,
-issueDate:issueDate.value,
-dob:dob.value
+reg:document.getElementById("reg").value,
+name:document.getElementById("name").value,
+course:document.getElementById("course").value,
+startDate:document.getElementById("startDate").value,
+endDate:document.getElementById("endDate").value,
+grade:document.getElementById("grade").value,
+issueDate:document.getElementById("issueDate").value,
+dob:document.getElementById("dob").value
 };
 
 let res=await fetch(API,{
@@ -269,6 +271,14 @@ body:JSON.stringify(data)
 let d=await res.text();
 
 alert(d);
+  document.getElementById("reg").value="";
+document.getElementById("name").value="";
+document.getElementById("course").value="";
+document.getElementById("startDate").value="";
+document.getElementById("endDate").value="";
+document.getElementById("grade").value="";
+document.getElementById("issueDate").value="";
+document.getElementById("dob").value="";
 loadStudents();
 }
 
