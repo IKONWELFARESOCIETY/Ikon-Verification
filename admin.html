@@ -19,7 +19,6 @@ min-height:100vh;
 color:#1e293b;
 }
 
-/* LOGIN */
 #adminLogin{
 height:100vh;
 display:flex;
@@ -36,13 +35,11 @@ padding:35px;
 border-radius:22px;
 box-shadow:0 8px 30px rgba(0,0,0,.08);
 text-align:center;
-animation:fadeUp .7s ease;
 }
 
 .loginBox h2{
 margin-bottom:20px;
 color:#1d4ed8;
-font-size:28px;
 }
 
 input{
@@ -52,13 +49,6 @@ margin:8px 0;
 border:1px solid #dbeafe;
 border-radius:12px;
 outline:none;
-font-size:15px;
-transition:.3s;
-}
-
-input:focus{
-border-color:#2563eb;
-box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
 button{
@@ -67,23 +57,14 @@ border:none;
 border-radius:12px;
 background:linear-gradient(90deg,#2563eb,#1d4ed8);
 color:white;
-font-weight:600;
 cursor:pointer;
-transition:.3s;
 }
 
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 20px rgba(37,99,235,.25);
-}
-
-/* DASHBOARD */
 #dashboard{
 display:none;
 padding:20px;
 max-width:1200px;
 margin:auto;
-animation:fadeUp .5s ease;
 }
 
 .topbar{
@@ -93,15 +74,9 @@ border-radius:18px;
 box-shadow:0 5px 20px rgba(0,0,0,.05);
 display:flex;
 justify-content:space-between;
-align-items:center;
 margin-bottom:25px;
 }
 
-.topbar h2{
-color:#1d4ed8;
-}
-
-/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -110,16 +85,10 @@ margin-bottom:25px;
 }
 
 .card{
-background:rgba(255,255,255,.85);
-backdrop-filter:blur(12px);
+background:white;
 padding:25px;
 border-radius:20px;
 box-shadow:0 8px 25px rgba(0,0,0,.06);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
 }
 
 .card h3{
@@ -134,7 +103,6 @@ font-weight:700;
 color:#2563eb;
 }
 
-/* SECTION */
 .section{
 background:white;
 padding:22px;
@@ -143,32 +111,10 @@ box-shadow:0 6px 22px rgba(0,0,0,.05);
 margin-bottom:25px;
 }
 
-.section h3{
-margin-bottom:15px;
-color:#334155;
-}
-
-/* ADD FORM */
-.section input{
-margin-bottom:12px;
-}
-
-/* SEARCH RESULT */
-#searchResult{
-margin-top:15px;
-padding:15px;
-background:#f8fafc;
-border-radius:12px;
-line-height:1.8;
-}
-
-/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:15px;
-overflow:hidden;
-border-radius:12px;
 }
 
 thead{
@@ -182,56 +128,16 @@ border-bottom:1px solid #e2e8f0;
 font-size:14px;
 }
 
-tbody tr:hover{
-background:#f8fafc;
-}
-
-.actions button{
-padding:7px 12px;
-font-size:12px;
-border-radius:8px;
-}
-
 .delete{
 background:linear-gradient(90deg,#ef4444,#dc2626);
 }
 
-.delete:hover{
-box-shadow:0 8px 20px rgba(239,68,68,.25);
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-.topbar{
-flex-direction:column;
-gap:12px;
-}
-
-.cards{
-grid-template-columns:1fr;
-}
-
-th,td{
-font-size:12px;
-padding:10px;
-}
-
-.loginBox{
-width:100%;
-}
+#searchResult{
+margin-top:15px;
+padding:15px;
+background:#f8fafc;
+border-radius:12px;
+line-height:1.8;
 }
 </style>
 </head>
@@ -241,10 +147,8 @@ width:100%;
 <div id="adminLogin">
 <div class="loginBox">
 <h2>Admin Login</h2>
-
 <input id="adminUser" placeholder="Username">
 <input id="adminPass" type="password" placeholder="Password">
-
 <button onclick="adminLogin()">Login</button>
 </div>
 </div>
@@ -269,41 +173,22 @@ width:100%;
 </div>
 
 <div class="card">
-<h3>Enquiries</h3>
-<p id="totalEnquiry">0</p>
+<h3>Student Logins</h3>
+<p id="totalLogins">0</p>
 </div>
-</div>
-
-<!-- ADD STUDENT -->
-<div class="section">
-<h3>Add Student</h3>
-
-<input id="reg" placeholder="Reg No">
-<input id="name" placeholder="Name">
-<input id="course" placeholder="Course">
-<input id="startDate" type="date">
-<input id="endDate" type="date">
-<input id="grade" placeholder="Grade">
-<input id="issueDate" type="date">
-<input id="dob" type="date">
-
-<button onclick="addStudent()">Add Student</button>
 </div>
 
 <!-- SEARCH -->
 <div class="section">
 <h3>Search Student</h3>
-
 <input id="searchReg" placeholder="Enter Reg No">
 <button onclick="searchStudent()">Search</button>
-
 <div id="searchResult"></div>
 </div>
 
-<!-- TABLE -->
+<!-- STUDENTS -->
 <div class="section">
 <h3>Recent Students</h3>
-
 <table>
 <thead>
 <tr>
@@ -314,8 +199,22 @@ width:100%;
 <th>Action</th>
 </tr>
 </thead>
-
 <tbody id="studentTable"></tbody>
+</table>
+</div>
+
+<!-- LOGIN HISTORY -->
+<div class="section">
+<h3>Student Login History</h3>
+<table>
+<thead>
+<tr>
+<th>Date & Time</th>
+<th>Name</th>
+<th>Reg No</th>
+</tr>
+</thead>
+<tbody id="loginTable"></tbody>
 </table>
 </div>
 
@@ -326,18 +225,26 @@ const API="https://script.google.com/macros/s/AKfycbzZNUs7DX_z71cCniWinmAztbs0wu
 
 /* LOGIN */
 function adminLogin(){
-
 let u=document.getElementById("adminUser").value;
 let p=document.getElementById("adminPass").value;
 
 if(u==="ikon" && p==="161101"){
 document.getElementById("adminLogin").style.display="none";
 document.getElementById("dashboard").style.display="block";
-  localStorage.setItem("adminLogged","yes");
+localStorage.setItem("adminLogged","yes");
 loadStudents();
+loadLoginLogs();
 }else{
 alert("Wrong Login");
 }
+}
+
+/* AUTO LOGIN */
+if(localStorage.getItem("adminLogged")==="yes"){
+document.getElementById("adminLogin").style.display="none";
+document.getElementById("dashboard").style.display="block";
+loadStudents();
+loadLoginLogs();
 }
 
 /* LOGOUT */
@@ -346,45 +253,8 @@ localStorage.removeItem("adminLogged");
 location.reload();
 }
 
-/* ADD STUDENT */
-async function addStudent(){
-
-let data={
-action:"add",
-reg:document.getElementById("reg").value,
-name:document.getElementById("name").value,
-course:document.getElementById("course").value,
-startDate:document.getElementById("startDate").value,
-endDate:document.getElementById("endDate").value,
-grade:document.getElementById("grade").value,
-issueDate:document.getElementById("issueDate").value,
-dob:document.getElementById("dob").value
-};
-let res=await fetch(API,{
-method:"POST",
-headers:{
-"Content-Type":"text/plain;charset=utf-8"
-},
-body:JSON.stringify(data)
-});
-
-let d=await res.text();
-
-alert(d);
-  document.getElementById("reg").value="";
-document.getElementById("name").value="";
-document.getElementById("course").value="";
-document.getElementById("startDate").value="";
-document.getElementById("endDate").value="";
-document.getElementById("grade").value="";
-document.getElementById("issueDate").value="";
-document.getElementById("dob").value="";
-loadStudents();
-}
-
 /* LOAD STUDENTS */
 async function loadStudents(){
-
 let res=await fetch(API+"?action=list");
 let data=await res.json();
 
@@ -394,19 +264,16 @@ document.getElementById("totalCerts").innerText=data.length;
 let html="";
 
 data.forEach(s=>{
-
 html+=`
 <tr>
 <td>${s.reg}</td>
 <td>${s.name}</td>
 <td>${s.course}</td>
 <td>${s.grade}</td>
-<td class="actions">
-<button onclick="deleteStudent('${s.reg}')" class="delete">Delete</button>
+<td>
+<button class="delete" onclick="deleteStudent('${s.reg}')">Delete</button>
 </td>
-</tr>
-`;
-
+</tr>`;
 });
 
 document.getElementById("studentTable").innerHTML=html;
@@ -414,23 +281,18 @@ document.getElementById("studentTable").innerHTML=html;
 
 /* SEARCH */
 async function searchStudent(){
-
 let reg=document.getElementById("searchReg").value;
-
 let res=await fetch(API+"?action=search&reg="+reg);
 let d=await res.json();
 
-document.getElementById("searchResult").innerHTML=
-`
+document.getElementById("searchResult").innerHTML=`
 <p><b>Name:</b> ${d.name||"-"}</p>
 <p><b>Course:</b> ${d.course||"-"}</p>
-<p><b>Grade:</b> ${d.grade||"-"}</p>
-`;
+<p><b>Grade:</b> ${d.grade||"-"}</p>`;
 }
 
 /* DELETE */
 async function deleteStudent(reg){
-
 if(!confirm("Delete student?")) return;
 
 await fetch(API,{
@@ -442,6 +304,27 @@ reg:reg
 });
 
 loadStudents();
+}
+
+/* LOGIN HISTORY */
+async function loadLoginLogs(){
+let res=await fetch(API+"?action=logs");
+let data=await res.json();
+
+document.getElementById("totalLogins").innerText=data.length;
+
+let html="";
+
+data.reverse().forEach(l=>{
+html+=`
+<tr>
+<td>${l.time}</td>
+<td>${l.name}</td>
+<td>${l.reg}</td>
+</tr>`;
+});
+
+document.getElementById("loginTable").innerHTML=html;
 }
 </script>
 </body>
