@@ -933,7 +933,7 @@ box-shadow:0 4px 10px rgba(0,0,0,.08);
 <body>
   <div id="homeChoice">
     <div class="choice-box">
-        <h1>IKON INSTITUTE</h1>        
+        <h1 id="ikonTitle">IKON INSTITUTE</h1>        
         <p>Select an option</p>
 <a href="javascript:void(0)" 
 class="choice-btn verify-btn"
@@ -1414,6 +1414,20 @@ document.body.appendChild(p);
 }
 
 </script>
+<script>
+let clickCount = 0;
 
+document.getElementById("ikonTitle").addEventListener("click", function() {
+  clickCount++;
+
+  if(clickCount === 3){
+    window.location.href = "admin.html";
+  }
+
+  setTimeout(() => {
+    clickCount = 0;
+  }, 2000);
+});
+</script>
 </body>
 </html>
