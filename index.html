@@ -982,7 +982,7 @@ Certificate Verification
 <div class="row"><b>Grade:</b> <span id="dGrade"></span></div>
 <div class="row"><b>Start Date:</b> <span id="dStartDate"></span></div>
 <div class="row"><b>End Date:</b> <span id="dEndDate"></span></div>
-<div class="row"><b>Certificate No:</b> <span id="dCertNo"></span></div>
+<div class="row"><b>Certificate No:</b> <span id="cCertNo"></span></div>
 
 <div class="glowBar">
 <span>
@@ -1022,7 +1022,7 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 
 <div class="certGrid">
 <div class="certNoTop">
-    Certificate No: <span id="dCertNo"></span>
+    Certificate No: <span id="cCertNo"></span>
 </div>
 <div class="left-info"><div><b>Reg No:</b> <span id="cReg"></span></div></div>
 <div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
@@ -1088,7 +1088,8 @@ document.getElementById("dStartDate").innerText =
 
 document.getElementById("dEndDate").innerText =
 (studentData.EndDate ?? "-");
-document.getElementById("dCertNo").innerText = d.certNo;
+document.getElementById("cCertNo").innerText =
+studentData.certNo || "-";
 
 }else{
 alert("Invalid Login");
@@ -1273,22 +1274,6 @@ update();
 requestAnimationFrame(draw);
 }
 
-function update(){
-
-pieces.forEach(p=>{
-
-p.tiltAngle += p.tiltAngleIncremental;
-p.y += (Math.cos(p.d)+3+p.r/2)/2;
-p.tilt = Math.sin(p.tiltAngle)*15;
-
-if(p.y > canvas.height){
-p.y = -20;
-p.x = Math.random()*canvas.width;
-}
-
-});
-
-}
 
 /* SPARKLES */
 
