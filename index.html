@@ -32,6 +32,12 @@
     color:#222;
     letter-spacing:1px;
 }
+    .centerEndDate{
+    text-align:center;
+    margin-top:15px;
+    font-size:16px;
+    font-weight:bold;
+}
 
 .certNoTop{
     position:absolute;
@@ -391,20 +397,6 @@ opacity:.5;
 animation:waveFloat linear infinite;
 }
 
-/* KEYFRAMES */
-
-@keyframes neonPulse{
-from{
-filter:
-drop-shadow(0 0 10px rgba(0,198,255,.3))
-drop-shadow(0 0 20px rgba(24,71,209,.2));
-}
-to{
-filter:
-drop-shadow(0 0 25px rgba(0,198,255,.7))
-drop-shadow(0 0 50px rgba(24,71,209,.5));
-}
-}
 
 @keyframes shineMove{
 0%{
@@ -1041,9 +1033,10 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
 <div class="left-info"><div><b>Grade:</b> <span id="cGrade"></span></div></div>
 <div class="right-info"><div><b>Start Date:</b> <span id="cStartDate"></span></div></div>
-<div class="left-info"><div><b>End Date:</b> <span id="cEndDate"></span></div></div>
 </div>
-
+    <div class="centerEndDate">
+  <b>End Date:</b> <span id="cEndDate"></span>
+</div>
 <div class="verify">
 <b>Issue Date:</b> <span id="cISSUEDATE"></span>
 </div>
