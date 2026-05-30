@@ -1160,6 +1160,8 @@ studentData.issueDate ||
 studentData.IssueDate ||
 "-"
 );
+    document.getElementById("cCertNo").innerText =
+studentData.certNo || "-";
 
 
 document.getElementById("cPhoto").src =
@@ -1218,8 +1220,6 @@ document.body.appendChild(burst);
 }
 
 }
-
-/* CONFETTI */
 
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
