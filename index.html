@@ -32,11 +32,16 @@
     color:#222;
     letter-spacing:1px;
 }
-    .centerEndDate{
+    .center-info{
+    grid-column: 1 / -1;
     text-align:center;
-    margin-top:15px;
-    font-size:16px;
-    font-weight:bold;
+}
+    .center-info{
+    width:100%;
+    text-align:center;
+    margin-top:10px;
+    font-size:inherit;
+    font-weight:inherit;
 }
 
 .certNoTop{
@@ -1027,14 +1032,14 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
     ESTD. 16 November 2001
 </div>
 <div class="certNoTop">
-    Certificate No: <span id="cCertNo"></span>
+    Certificate No: <span id="dCertNo"></span>
 </div>
 <div class="left-info"><div><b>Reg No:</b> <span id="cReg"></span></div></div>
 <div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
 <div class="left-info"><div><b>Grade:</b> <span id="cGrade"></span></div></div>
 <div class="right-info"><div><b>Start Date:</b> <span id="cStartDate"></span></div></div>
 </div>
-    <div class="centerEndDate">
+    <div class=""center-info"">
   <b>End Date:</b> <span id="cEndDate"></span>
 </div>
 <div class="verify">
@@ -1092,8 +1097,7 @@ document.getElementById("dStartDate").innerText =
 
 document.getElementById("dEndDate").innerText =
 (studentData.EndDate ?? "-");
-document.getElementById("cCertNo").innerText =
-studentData.certNo || "-";
+document.getElementById("cCertNo").innerText =studentData.certNo || "-";
 
 }else{
 alert("Invalid Login");
@@ -1165,7 +1169,7 @@ studentData.issueDate ||
 studentData.IssueDate ||
 "-"
 );
- document.getElementById("cCertNo").innerText =
+ document.getElementById("dCertNo").innerText =
 studentData.certNo || "-";   
 
 
