@@ -23,6 +23,14 @@
 
 </head>
 <style>
+    .certNoTop{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:14px;
+    font-weight:700;
+    color:#222;
+}
     /* Initial hidden state */
 .left-info,
 .right-info{
@@ -974,6 +982,7 @@ Certificate Verification
 <div class="row"><b>Grade:</b> <span id="dGrade"></span></div>
 <div class="row"><b>Start Date:</b> <span id="dStartDate"></span></div>
 <div class="row"><b>End Date:</b> <span id="dEndDate"></span></div>
+<div class="row"><b>Certificate No:</b> <span id="dCertNo"></span></div>
 
 <div class="glowBar">
 <span>
@@ -1012,6 +1021,9 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 <h3 id="cName"></h3>
 
 <div class="certGrid">
+<div class="certNoTop">
+    Certificate No: <span id="cCertNo"></span>
+</div>
 <div class="left-info"><div><b>Reg No:</b> <span id="cReg"></span></div></div>
 <div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
 <div class="left-info"><div><b>Grade:</b> <span id="cGrade"></span></div></div>
@@ -1076,6 +1088,8 @@ document.getElementById("dStartDate").innerText =
 
 document.getElementById("dEndDate").innerText =
 (studentData.EndDate ?? "-");
+document.getElementById("dCertNo").innerText =
+(studentData.certNo ?? "-");
 
 }else{
 alert("Invalid Login");
