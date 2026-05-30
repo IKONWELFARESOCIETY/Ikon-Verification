@@ -1022,7 +1022,7 @@ DCA • Learn Basics • ADCA • Build Strong Foundation • PGDAM • Upgrade 
 
 <div class="certGrid">
 <div class="certNoTop">
-    Certificate No: <span id="cCertNo"></span>
+    Certificate No: <span id="dCertNo"></span>
 </div>
 <div class="left-info"><div><b>Reg No:</b> <span id="cReg"></span></div></div>
 <div class="right-info"><div><b>Course:</b> <span id="cCourse"></span></div></div>
@@ -1088,7 +1088,7 @@ document.getElementById("dStartDate").innerText =
 
 document.getElementById("dEndDate").innerText =
 (studentData.EndDate ?? "-");
-document.getElementById("cCertNo").innerText =
+document.getElementById("dCertNo").innerText =
 studentData.certNo || "-";
 
 }else{
@@ -1161,7 +1161,8 @@ studentData.issueDate ||
 studentData.IssueDate ||
 "-"
 );
-    document.getElementById("cCertNo").innerText = "TEST123";
+ document.getElementById("cCertNo").innerText =
+studentData.certNo || "-";   
 
 
 document.getElementById("cPhoto").src =
